@@ -1,11 +1,8 @@
-﻿#Param
-#(
-#    [string]$PAT,
-#    [string]$Organization
-#)
-
-$PAT = 'ldjud4acfkbnil67g77patcbrpdgym7wvbiqnjm4euhutzpwcmga'
-$Organization = 'vstssprints'
+﻿Param
+(
+    [string]$PAT,
+    [string]$Organization
+)
 
 $SelfHostedAgentCapabilities = @()
 
