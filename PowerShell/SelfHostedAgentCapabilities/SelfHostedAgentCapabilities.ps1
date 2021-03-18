@@ -10,30 +10,32 @@ $Organization = 'vstssprints'
 $SelfHostedAgentCapabilities = @()
 
 $AzureDevOpsAuthenicationHeader = @{Authorization = 'Basic ' + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(":$($PAT)")) }
-
 $UriOrganization = "https://dev.azure.com/$($Organization)/"
-$UriPools = $UriOrganization + '/_apis/distributedtask/pools?api-version=6.0'
 
-$PoolsResult = Invoke-RestMethod -Uri $UriPools -Method get -Headers $AzureDevOpsAuthenicationHeader | where {$_.agentCloudId -ne 1}
+$UriPools = $UriOrganization + '/_apis/distributedtask/pools?api-version=6.0'
+$PoolsResult = Invoke-RestMethod -Uri $UriPools -Method get -Headers $AzureDevOpsAuthenicationHeader
 
 Foreach ($pool in $PoolsResult.value)
 {
-    $uriAgents = $UriOrganization + "_apis/distributedtask/pools/$($pool.Id)/agents?api-version=6.0"
-    $AgentsResults = Invoke-RestMethod -Uri $uriAgents -Method get -Headers $AzureDevOpsAuthenicationHeader
-    Foreach ($agent in $AgentsResults.value)
+    if ($pool.agentCloudId -ne 1)
     {
-        $uriSelfHostedAgentCapabilities = $UriOrganization + "_apis/distributedtask/pools/$($pool.Id)/agents/$($agent.Id)?includeCapabilities=true&api-version=6.0"
-        $SelfHostedAgentCapabilitiesResult = Invoke-RestMethod -Uri $uriSelfHostedAgentCapabilities -Method get -Headers $AzureDevOpsAuthenicationHeader
-        Foreach ($shac in $SelfHostedAgentCapabilitiesResult)
+        $uriAgents = $UriOrganization + "_apis/distributedtask/pools/$($pool.Id)/agents?api-version=6.0"
+        $AgentsResults = Invoke-RestMethod -Uri $uriAgents -Method get -Headers $AzureDevOpsAuthenicationHeader
+        Foreach ($agent in $AgentsResults.value)
         {
-            $Capabilities = $shac.systemCapabilities | Get-Member | where {$_.MemberType -eq 'NoteProperty'}
-            Foreach ($cap in $Capabilities)
+            $uriSelfHostedAgentCapabilities = $UriOrganization + "_apis/distributedtask/pools/$($pool.Id)/agents/$($agent.Id)?includeCapabilities=true&api-version=6.0"
+            $SelfHostedAgentCapabilitiesResult = Invoke-RestMethod -Uri $uriSelfHostedAgentCapabilities -Method get -Headers $AzureDevOpsAuthenicationHeader
+            Foreach ($shac in $SelfHostedAgentCapabilitiesResult)
             {
-                $SelfHostedAgentCapabilities += New-Object -TypeName PSObject -Property @{
-                    PoolName=$pool.name
-                    AgentName=$agent.name
-                    CapabilityName=$cap.Name
-                    CapabilityValue=$($shac.systemCapabilities.$($cap.Name))
+                $Capabilities = $shac.systemCapabilities | Get-Member | where {$_.MemberType -eq 'NoteProperty'}
+                Foreach ($cap in $Capabilities)
+                {
+                    $SelfHostedAgentCapabilities += New-Object -TypeName PSObject -Property @{
+                        PoolName=$pool.name
+                        AgentName=$agent.name
+                        CapabilityName=$cap.Name
+                        CapabilityValue=$($shac.systemCapabilities.$($cap.Name))
+                    }
                 }
             }
         }
