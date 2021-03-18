@@ -4,7 +4,7 @@
 #    [string]$Organization
 #)
 
-$PAT='ldjud4acfkbnil67g77patcbrpdgym7wvbiqnjm4euhutzpwcmga'
+$PAT=''
 $Organization='vstssprints'
 
 $DeploymentGroups = @()
