@@ -48,4 +48,4 @@ $createRepo = az repos create --name $RepoName --project $Project --organization
 Write-Host '======Remote URL: ' $createRepo.remoteUrl
 Write-Host '======Repo ID: ' $createRepo.id
 
-Set-BranchPolicy -Organization $Organization -Project $Project -repoId $createRepo.id -Reviewers $Reviewers -branchName "master"
+Set-BranchPolicy -Organization $Organization -Project $Project -repoId $createRepo.id -Reviewers $Reviewers -branchName "main"
