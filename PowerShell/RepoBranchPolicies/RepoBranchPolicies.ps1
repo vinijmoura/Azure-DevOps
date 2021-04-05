@@ -1,8 +1,13 @@
 Param
 (
     [string]$PAT,
-    [string]$Organization
+    [string]$Organization,
+    [string]$Connstr
 )
+
+$SQLQuery = "TRUNCATE TABLE RepoBranchPolicies"
+Invoke-Sqlcmd -query $SQLQuery -ConnectionString $Connstr
+
 $RepoBranchPolicies = @()
 
 $minimumRev = "Minimum number of reviewers"
@@ -55,8 +60,35 @@ Foreach ($project in $ProjectsResult.value)
                     RepositoryDefaultBranchCommentRequirements=$repocommentReq
                     RepositoryDefaultBranchBuild=$repoBuild
             }
+            $SQLQuery = "INSERT INTO RepoBranchPolicies (
+                         TeamProjectId,
+                         TeamProjectName,
+                         RepositoryId,
+                         RepositoryName,
+                         RepositoryURL,
+                         RepositoryDefaultBranch,
+                         RepositoryDefaultBranchMinimumNumberOfReviewers,
+                         RepositoryDefaultBranchRequiredReviewers,
+                         RepositoryDefaultBranchWorkItemLinking,
+                         RepositoryDefaultBranchCommentRequirements,
+                         RepositoryDefaultBranchBuild )
+                         VALUES(
+                         '$($project.id)',
+                         '$($project.name)',
+                         '$($repo.id)',
+                         '$($repo.name)',
+                         '$($repo.remoteUrl)',
+                         '$($repo.defaultBranch)',
+                         '$($repominimumRev)',
+                         '$($reporeqReviewers)',
+                         '$($repoworkItemLink)',
+                         '$($repocommentReq)',
+                         '$($repoBuild)'
+                         )"
+            Invoke-Sqlcmd -query $SQLQuery -ConnectionString $Connstr
         }
     }
 }
 
 $RepoBranchPolicies | ConvertTo-Json | Out-File -FilePath "$home\desktop\RepoBranchPolicies.json"
+
