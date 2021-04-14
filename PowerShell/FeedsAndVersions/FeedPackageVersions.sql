@@ -1,13 +1,14 @@
-CREATE TABLE FeedPackageVersions
-(
-	FeedName									VARCHAR(100),
-    FeedDescription							    NVARCHAR(MAX),
-    FeedPackageName								VARCHAR(100),
-    FeedPackageType								VARCHAR(30),
-	FeedPackageSource							VARCHAR(30),
-    FeedPackageVersion							VARCHAR(50),
-    FeedPackageVersionLatest					BIT,
-    FeedPackageVersionDate						DATETIME,
-    FeedPackageVersionDownloadCount				INT,
-    FeedPackageVersionDownloadUniqueUsers		INT
-)
+CREATE TABLE [dbo].[FeedPackageVersions](
+	[FeedName] [varchar](100) NULL,
+	[FeedDescription] [nvarchar](max) NULL,
+	[FeedPackageName] [varchar](100) NULL,
+	[FeedPackageType] [varchar](30) NULL,
+	[FeedPackageSource] [varchar](30) NULL,
+	[FeedPackageVersion] [varchar](50) NULL,
+	[FeedPackageVersionLatest] [bit] NULL,
+	[FeedPackageVersionDate] [datetime] NULL,
+	[FeedPackageVersionDownloadCount] [int] NULL,
+	[FeedPackageVersionDownloadUniqueUsers] [int] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
