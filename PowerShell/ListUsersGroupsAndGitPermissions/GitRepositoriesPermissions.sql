@@ -1,6 +1,6 @@
 CREATE TABLE [dbo].[GitRepositoriesPermissions](
 	[TeamProjectName] [varchar](100) NULL,
-    [RepoName] [varchar](100) NULL,
+        [RepoName] [varchar](100) NULL,
 	[SecurityNameSpace] [varchar](100) NULL,
 	[UserPrincipalName] [varchar](100) NULL,
 	[UserDisplayName] [varchar](100) NULL,
