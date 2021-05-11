@@ -4,7 +4,7 @@ Code Samples (applications, scripts, demos, etc.) to apply on Azure DevOps and G
 ## List of blog posts on Medium
    * Azure Repos
    * Azure Boards
-     - [How to: Create all iterations to your project on Azure DevOps](https://vinijmoura.medium.com/how-to-create-all-iterations-to-your-project-on-azure-devops-cedadb045705)
+     * [How to: Create all iterations to your project on Azure DevOps](https://vinijmoura.medium.com/how-to-create-all-iterations-to-your-project-on-azure-devops-cedadb045705)
    * Azure Pipelines 
 
 - [How to: Create repository and branch policies on Azure DevOps using Azure DevOps CLI](https://vinijmoura.medium.com/how-to-create-repository-and-branch-policies-on-azure-devops-using-azure-devops-cli-1186e179fa9b)
