@@ -1,0 +1,9 @@
+title: Azure DevOps
+description: Code Samples (applications, scripts, demos, etc.) to apply on Azure DevOps and GitHub.
+markdown: kramdown
+
+plugins:
+  - jekyll-relative-links
+relative_links:
+  enabled: true
+  collections: true
