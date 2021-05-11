@@ -2,7 +2,11 @@
 Code Samples (applications, scripts, demos, etc.) to apply on Azure DevOps and GitHub
 
 ## List of blog posts on Medium
-- [How to: Create all iterations to your project on Azure DevOps](https://vinijmoura.medium.com/how-to-create-all-iterations-to-your-project-on-azure-devops-cedadb045705)
+   * Azure Repos
+   * Azure Boards
+     - [How to: Create all iterations to your project on Azure DevOps](https://vinijmoura.medium.com/how-to-create-all-iterations-to-your-project-on-azure-devops-cedadb045705)
+   * Azure Pipelines 
+
 - [How to: Create repository and branch policies on Azure DevOps using Azure DevOps CLI](https://vinijmoura.medium.com/how-to-create-repository-and-branch-policies-on-azure-devops-using-azure-devops-cli-1186e179fa9b)
 - [How to: List GitHub Repositories and master protection rules](https://vinijmoura.medium.com/how-to-list-github-repositories-and-master-protection-rules-a21d8b412d0b)
 - [How to: Include new users based on active user permissions on Azure DevOps using Azure DevOps CLI](https://vinijmoura.medium.com/how-to-include-new-users-based-on-active-user-permissions-on-azure-devops-using-azure-devops-cli-255e927d8370)
