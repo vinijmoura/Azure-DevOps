@@ -7,6 +7,22 @@
     [string]$Connstr
 )
 
+Function get-Identifier ($children,[ref]$AllAreaPaths)
+{
+    ForEach ( $ac in $children )
+    {         
+        $AreaNodes.Add((add-AreaMember -member $ac))
+        $ac | get-Identifier -children $ac.children -AreaNodes ([ref]$AllAreaPaths)
+    }
+}
+
+Function add-AreaMember ($member)
+{
+    $newMember = New-Object PSObject
+    $newMember | Add-Member -MemberType NoteProperty -Name "Identifier" -Value $member.identifier
+    $newMember | Add-Member -MemberType NoteProperty -Name "Path" -Value $member.path.Replace("\Area",'').Substring(1)   
+    return $newMember
+}
 
 $SQLQuery = "TRUNCATE TABLE AreaPermissions"
 Invoke-Sqlcmd -query $SQLQuery -ConnectionString $Connstr
@@ -34,6 +50,13 @@ $ProjectRootAreaResult = Invoke-RestMethod -Uri $uriProjectRootArea -Method get 
 $ProjectRootAreaResult = $ProjectRootAreaResult.value | Where structureType -EQ "area"
 $areaRootToken = "vstfs:///Classification/Node/$($ProjectRootAreaResult.identifier)*"
 
+#Get All Area Paths
+$uriAreaPath = $Organization + "/$($ProjectName)/_apis/wit/classificationnodes/Areas?`$depth=5&api-version=4.1"
+$AreaPathResult = Invoke-RestMethod -Uri $uriAreaPath -Method get -Headers $AzureDevOpsAuthenicationHeader
+$AreaNodes = New-Object 'System.Collections.Generic.List[psobject]'
+$AreaNodes.Add((add-AreaMember -member $AreaPathResult))
+$AreaPathResult | get-Identifier -children $AreaPathResult.children -AreaNodes ([ref]$AreaNodes)
+
 #Get all group that respective user belongs
 $activeUserGroups = az devops security group membership list --id $allUsers.principalName --org $Organization --relationship memberof | ConvertFrom-Json
 [array]$groups = ($activeUserGroups | Get-Member -MemberType NoteProperty).Name
@@ -47,21 +70,8 @@ Foreach ($aug in $groups)
         $allAreasTokens = $allAreasTokens | where-object {$_.token -like $areaRootToken}
         Foreach ($aat in $allAreasTokens)
         {
-            #Check if token belongs to Root Area Path or Children AreaPath
-            $Occurrencesvstsf = ([regex]::Matches($aat.token, "vstfs:///" )).count
-            $uriAreaPath = $Organization + "/$($ProjectName)/_apis/wit/classificationnodes/Areas?`$depth=5&api-version=4.1"
-            $AreaPathResult = Invoke-RestMethod -Uri $uriAreaPath -Method get -Headers $AzureDevOpsAuthenicationHeader
-            if ($Occurrencesvstsf -eq 1)
-            {
-                $AreaPathName = $AreaPathResult.path
-            }
-            else
-            { 
-                $AreaPathName = $AreaPathResult.children | Where-Object {$_.identifier -EQ $aat.token.Substring($aat.token.lastIndexOf('/') + 1)}
-                $AreaPathName = $AreaPathName.path
-            }
-            $AreaPathName = $AreaPathName.Replace("\Area",'').Substring(1)
-
+            $AreaPathName = $AreaNodes | Where-Object {$_.identifier -EQ $aat.token.Substring($aat.token.lastIndexOf('/') + 1)}
+            
             #Get AreaPath Commands and Permissions from respective group and token
             $AreaCommands = az devops security permission show --id $SecurityNameSpaceIdCSS --subject $activeUserGroups.$aug.descriptor --token $aat.token --org $Organization | ConvertFrom-Json
             $AreaPermissions = ($AreaCommands[0].acesDictionary | Get-Member -MemberType NoteProperty).Name
@@ -80,7 +90,7 @@ Foreach ($aug in $groups)
                             AreaCommandPermission)
                             VALUES(
                             '$($allProjects.name)',
-                            '$($AreaPathName)',
+                            '$($AreaPathName.path)',
                             'CSS',
                             '$($allUsers.principalName)',
                             '$($allUsers.displayName)',
