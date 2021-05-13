@@ -1,5 +1,5 @@
 # Azure DevOps
-Code Samples (applications, scripts, demos, etc.) to apply on Azure DevOps and GitHub
+Code Samples (applications, scripts, PowerBI reports, demos, etc.) to apply on Azure DevOps and GitHub
 
 ## List of blog posts on Medium
    * Azure Repos
@@ -35,6 +35,7 @@ Code Samples (applications, scripts, demos, etc.) to apply on Azure DevOps and G
      * [How to: Extract Project Level Permissions from the respective user, and project](https://vinijmoura.medium.com/how-to-extract-project-level-permissions-from-the-respective-user-and-project-5f4c30df03ee)
      * [How to: Extract Organization Level Permissions from the respective user in Azure DevOps](https://vinijmoura.medium.com/how-to-extract-organization-level-permissions-from-the-respective-user-in-azure-devops-c93d9df6c855)
      * [How to: Extract Area Path Permissions from the respective user, and project in Azure DevOps](https://vinijmoura.medium.com/how-to-extract-area-path-permissions-from-the-respective-user-and-project-in-azure-devops-e0d4fda33d9a)
+     * [How to: Extract Iteration Path Permissions from the respective user, and project in Azure DevOps](https://vinijmoura.medium.com/how-to-extract-iteration-path-permissions-from-the-respective-user-and-project-in-azure-devops-660bcc5e55e0)
      
    * GitHub
      * [How to: List GitHub Repositories and master protection rules](https://vinijmoura.medium.com/how-to-list-github-repositories-and-master-protection-rules-a21d8b412d0b)
