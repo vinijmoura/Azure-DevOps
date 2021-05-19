@@ -5,6 +5,7 @@ Code Samples (applications, scripts, PowerBI reports, demos, etc.) to apply on A
    * Azure Repos
      * [How to: Create repository and branch policies on Azure DevOps using Azure DevOps CLI](https://vinijmoura.medium.com/how-to-create-repository-and-branch-policies-on-azure-devops-using-azure-devops-cli-1186e179fa9b)
      *  [How to: Viewing which repositories have branch policies on Azure DevOps](https://vinijmoura.medium.com/how-to-viewing-which-repositories-have-branch-policies-on-azure-devops-c9bfb370401e)
+     *  [How to: Create Pull Requests Dashboard on Azure DevOps](https://vinijmoura.medium.com/how-to-create-pull-requests-dashboard-on-azure-devops-ff3befad1000)
    
    * Azure Boards
      * [How to: Create all iterations to your project on Azure DevOps](https://vinijmoura.medium.com/how-to-create-all-iterations-to-your-project-on-azure-devops-cedadb045705)
