@@ -17,6 +17,7 @@ Code Samples (applications, scripts, PowerBI reports, demos, etc.) to apply on A
    * Azure Pipelines
      * [How to: List all pools, agent and capabilities of self-hosted agents](https://vinijmoura.medium.com/how-to-list-all-pools-agent-and-capabilities-of-self-hosted-agents-6f66bbe46aa0) 
      * [How to: List all Release Definitions, Stages, and Approvers on Classic Releases in Azure DevOps](https://vinijmoura.medium.com/how-to-list-all-release-definitions-stages-and-approvers-on-classic-releases-in-azure-devops-733bdabb7a5f)
+     * [How to: Create Variable Groups (Libraries) Dashboard on Azure DevOps](https://vinijmoura.medium.com/how-to-create-variable-groups-libraries-dashboard-on-azure-devops-4d73ca0529f2)
    
    * Azure Artifacts
      * [How to: List all Feeds, Packages, and Versions at Azure Artifacts in Azure DevOps](https://vinijmoura.medium.com/how-to-list-all-feeds-packages-and-versions-at-azure-artifacts-in-azure-devops-ce511001d9f7)
