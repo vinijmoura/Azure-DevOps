@@ -19,6 +19,7 @@ Code Samples (applications, scripts, PowerBI reports, demos, etc.) to apply on A
 * [How to: List all Release Definitions, Stages, and Approvers on Classic Releases in Azure DevOps](https://vinijmoura.medium.com/how-to-list-all-release-definitions-stages-and-approvers-on-classic-releases-in-azure-devops-733bdabb7a5f)
 * [How to: Create Variable Groups (Libraries) Dashboard on Azure DevOps](https://vinijmoura.medium.com/how-to-create-variable-groups-libraries-dashboard-on-azure-devops-4d73ca0529f2)
 * [How to: Create Dashboard to visualize Environments and Deployments on Azure DevOps](https://vinijmoura.medium.com/how-to-create-dashboard-to-visualize-environments-and-deployments-on-azure-devops-319ddb1614f4)
+* [How to: Create Task Groups Dashboard on Azure DevOps](https://vinijmoura.medium.com/how-to-create-task-groups-dashboard-on-azure-devops-a4a388d2426d)
    
 ### Azure Artifacts
 * [How to: List all Feeds, Packages, and Versions at Azure Artifacts in Azure DevOps](https://vinijmoura.medium.com/how-to-list-all-feeds-packages-and-versions-at-azure-artifacts-in-azure-devops-ce511001d9f7)
