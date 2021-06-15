@@ -35,6 +35,7 @@ Code Samples (applications, scripts, PowerBI reports, demos, etc.) to apply on A
 * [How to: List all Process Templates and respective Team Projects on Azure DevOps](https://vinijmoura.medium.com/how-to-list-all-process-templates-and-respective-team-projects-on-azure-devops-1a2177ef0ba1)
      
 ### Permissions
+![permissions](./images/Permissions.png) 
 * [How to: Extract Git Permissions from the respective user and repositories](https://vinijmoura.medium.com/how-to-extract-git-permissions-from-the-respective-user-and-repositories-1f439b9e4181)
 * [How to: Extract Pipeline (Build and Release) Permissions from the respective user, and project](https://vinijmoura.medium.com/how-to-extract-pipeline-build-and-release-permissions-from-the-respective-user-and-project-dd83163b232d)
 * [How to: Extract Project Level Permissions from the respective user, and project](https://vinijmoura.medium.com/how-to-extract-project-level-permissions-from-the-respective-user-and-project-5f4c30df03ee)
@@ -43,6 +44,7 @@ Code Samples (applications, scripts, PowerBI reports, demos, etc.) to apply on A
 * [How to: Extract Iteration Path Permissions from the respective user, and project in Azure DevOps](https://vinijmoura.medium.com/how-to-extract-iteration-path-permissions-from-the-respective-user-and-project-in-azure-devops-660bcc5e55e0)
      
 ### General
+![general](./images/general.png) 
 * [How to: Include new users based on active user permissions on Azure DevOps using Azure DevOps CLI](https://vinijmoura.medium.com/how-to-include-new-users-based-on-active-user-permissions-on-azure-devops-using-azure-devops-cli-255e927d8370)
 * [How to: List all users and group permissions on Azure DevOps using Azure DevOps CLI](https://vinijmoura.medium.com/how-to-list-all-users-and-group-permissions-on-azure-devops-using-azure-devops-cli-54f73a20a4c7)
 * [How to: Azure DevOps Service health using maps in Power BI](https://vinijmoura.medium.com/how-to-azure-devops-service-health-using-maps-in-power-bi-711bb7c657c2)
@@ -50,5 +52,6 @@ Code Samples (applications, scripts, PowerBI reports, demos, etc.) to apply on A
 * [How to: Create Service Connections Dashboard on Azure DevOps](https://vinijmoura.medium.com/how-to-create-service-connections-dashboard-on-azure-devops-9708045ceba8)
 
 ### GitHub
+![github](./images/github.png) 
 * [How to: List GitHub Repositories and master protection rules](https://vinijmoura.medium.com/how-to-list-github-repositories-and-master-protection-rules-a21d8b412d0b)
 * [How to: Create GitHub Action to deploy Azure Web App within Visual Studio](https://vinijmoura.medium.com/how-to-create-github-action-to-deploy-azure-web-app-within-visual-studio-edfad212c2da)
