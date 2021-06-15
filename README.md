@@ -4,6 +4,7 @@ Code Samples (applications, scripts, PowerBI reports, demos, etc.) to apply on A
 ## List of blog posts on Medium
 
 ### Azure Boards
+![boards](./images/Boards.png) 
 * [How to: Create all iterations to your project on Azure DevOps](https://vinijmoura.medium.com/how-to-create-all-iterations-to-your-project-on-azure-devops-cedadb045705)
 * [How to: Viewing individual capacities on different projects, teams, and sprints in Azure DevOps](https://vinijmoura.medium.com/how-to-viewing-individual-capacities-on-different-projects-teams-and-sprints-in-azure-devops-d369c6f14155)
 * [How to: Viewing capacities and days off on Azure DevOps](https://vinijmoura.medium.com/how-to-viewing-capacities-and-days-off-on-azure-devops-6f870348d0ff)
@@ -11,11 +12,13 @@ Code Samples (applications, scripts, PowerBI reports, demos, etc.) to apply on A
 * [How to: Work Item Visualization report in Power BI using OData to connect Azure DevOps](https://vinijmoura.medium.com/how-to-work-item-visualization-report-in-power-bi-using-odata-to-connect-azure-devops-505afcc9a99a)
 
 ### Azure Repos
+![boards](./images/Repos.png) 
 * [How to: Create repository and branch policies on Azure DevOps using Azure DevOps CLI](https://vinijmoura.medium.com/how-to-create-repository-and-branch-policies-on-azure-devops-using-azure-devops-cli-1186e179fa9b)
 *  [How to: Viewing which repositories have branch policies on Azure DevOps](https://vinijmoura.medium.com/how-to-viewing-which-repositories-have-branch-policies-on-azure-devops-c9bfb370401e)
 *  [How to: Create Pull Requests Dashboard on Azure DevOps](https://vinijmoura.medium.com/how-to-create-pull-requests-dashboard-on-azure-devops-ff3befad1000)
    
 ### Azure Pipelines
+![boards](./images/Pipelines.png) 
 * [How to: List all pools, agent and capabilities of self-hosted agents](https://vinijmoura.medium.com/how-to-list-all-pools-agent-and-capabilities-of-self-hosted-agents-6f66bbe46aa0) 
 * [How to: List all Release Definitions, Stages, and Approvers on Classic Releases in Azure DevOps](https://vinijmoura.medium.com/how-to-list-all-release-definitions-stages-and-approvers-on-classic-releases-in-azure-devops-733bdabb7a5f)
 * [How to: Create Variable Groups (Libraries) Dashboard on Azure DevOps](https://vinijmoura.medium.com/how-to-create-variable-groups-libraries-dashboard-on-azure-devops-4d73ca0529f2)
@@ -23,6 +26,7 @@ Code Samples (applications, scripts, PowerBI reports, demos, etc.) to apply on A
 * [How to: Create Task Groups Dashboard on Azure DevOps](https://vinijmoura.medium.com/how-to-create-task-groups-dashboard-on-azure-devops-a4a388d2426d)
    
 ### Azure Artifacts
+![boards](./images/Artifacts.png) 
 * [How to: List all Feeds, Packages, and Versions at Azure Artifacts in Azure DevOps](https://vinijmoura.medium.com/how-to-list-all-feeds-packages-and-versions-at-azure-artifacts-in-azure-devops-ce511001d9f7)
       
 ### Process
