@@ -44,7 +44,7 @@ Code Samples (applications, scripts, PowerBI reports, demos, etc.) to apply on A
 * [How to: Extract Iteration Path Permissions from the respective user, and project in Azure DevOps](https://vinijmoura.medium.com/how-to-extract-iteration-path-permissions-from-the-respective-user-and-project-in-azure-devops-660bcc5e55e0)
      
 ### General
-![general](./images/general.png) 
+![general](./images/General.png) 
 * [How to: Include new users based on active user permissions on Azure DevOps using Azure DevOps CLI](https://vinijmoura.medium.com/how-to-include-new-users-based-on-active-user-permissions-on-azure-devops-using-azure-devops-cli-255e927d8370)
 * [How to: List all users and group permissions on Azure DevOps using Azure DevOps CLI](https://vinijmoura.medium.com/how-to-list-all-users-and-group-permissions-on-azure-devops-using-azure-devops-cli-54f73a20a4c7)
 * [How to: Azure DevOps Service health using maps in Power BI](https://vinijmoura.medium.com/how-to-azure-devops-service-health-using-maps-in-power-bi-711bb7c657c2)
