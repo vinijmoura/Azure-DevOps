@@ -30,6 +30,7 @@ Code Samples (applications, scripts, PowerBI reports, demos, etc.) to apply on A
 * [How to: List all Feeds, Packages, and Versions at Azure Artifacts in Azure DevOps](https://vinijmoura.medium.com/how-to-list-all-feeds-packages-and-versions-at-azure-artifacts-in-azure-devops-ce511001d9f7)
       
 ### Process
+![boards](./images/Process.png) 
 * [How to: Get all process templates, work item types, and fields using REST API on Azure DevOps](https://vinijmoura.medium.com/how-to-get-all-process-templates-work-item-types-and-fields-using-rest-api-on-azure-devops-95b4efcca3a4)
 * [How to: List all Process Templates and respective Team Projects on Azure DevOps](https://vinijmoura.medium.com/how-to-list-all-process-templates-and-respective-team-projects-on-azure-devops-1a2177ef0ba1)
      
