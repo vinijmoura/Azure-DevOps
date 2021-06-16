@@ -45,7 +45,6 @@ Foreach ($project in $ProjectsResult.value)
                                 '$($tgt.task.versionSpec)',
                                 '$($tgt.enabled)'
                                 )"
-            $SQLQuery
             Invoke-Sqlcmd -query $SQLQuery -ConnectionString $Connstr
         }
     }
