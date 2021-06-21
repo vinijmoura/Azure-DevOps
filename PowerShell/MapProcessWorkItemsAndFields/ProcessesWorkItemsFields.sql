@@ -1,10 +1,3 @@
-/****** Object:  Table [dbo].[ProcessesWorkItemsFields]    Script Date: 6/21/2021 3:59:12 PM ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
 CREATE TABLE [dbo].[ProcessesWorkItemsFields](
 	[ProcessName] [varchar](100) NULL,
 	[ProcessCustomizationType] [varchar](40) NULL,
