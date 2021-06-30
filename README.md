@@ -16,6 +16,7 @@ Code Samples (applications, scripts, PowerBI reports, demos, etc.) to apply on A
 * [How to: Create repository and branch policies on Azure DevOps using Azure DevOps CLI](https://vinijmoura.medium.com/how-to-create-repository-and-branch-policies-on-azure-devops-using-azure-devops-cli-1186e179fa9b)
 *  [How to: Viewing which repositories have branch policies on Azure DevOps](https://vinijmoura.medium.com/how-to-viewing-which-repositories-have-branch-policies-on-azure-devops-c9bfb370401e)
 *  [How to: Create Pull Requests Dashboard on Azure DevOps](https://vinijmoura.medium.com/how-to-create-pull-requests-dashboard-on-azure-devops-ff3befad1000)
+*  [How to: Create Dashboard to visualize Branches ahead/behind](https://vinijmoura.medium.com/how-to-create-dashboard-to-visualize-branches-ahead-behind-6154cad4308d)
    
 ### Azure Pipelines
 ![pipelines](./images/Pipelines.png) 
