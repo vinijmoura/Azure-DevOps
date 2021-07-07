@@ -25,6 +25,7 @@ Code Samples (applications, scripts, PowerBI reports, demos, etc.) to apply on A
 * [How to: Create Variable Groups (Libraries) Dashboard on Azure DevOps](https://vinijmoura.medium.com/how-to-create-variable-groups-libraries-dashboard-on-azure-devops-4d73ca0529f2)
 * [How to: Create Dashboard to visualize Environments and Deployments on Azure DevOps](https://vinijmoura.medium.com/how-to-create-dashboard-to-visualize-environments-and-deployments-on-azure-devops-319ddb1614f4)
 * [How to: Create Task Groups Dashboard on Azure DevOps](https://vinijmoura.medium.com/how-to-create-task-groups-dashboard-on-azure-devops-a4a388d2426d)
+* [How to: Environments, Approvals, and Checks Mapping on Azure DevOps](https://vinijmoura.medium.com/how-to-environments-approvals-and-checks-mapping-on-azure-devops-5ac481f7c838)
    
 ### Azure Artifacts
 ![artifacts](./images/Artifacts.png) 
