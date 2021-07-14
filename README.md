@@ -10,6 +10,7 @@ Code Samples (applications, scripts, PowerBI reports, demos, etc.) to apply on A
 * [How to: Viewing capacities and days off on Azure DevOps](https://vinijmoura.medium.com/how-to-viewing-capacities-and-days-off-on-azure-devops-6f870348d0ff)
 * [How to: Creating a report in Power BI using OData to connect Azure DevOps](https://vinijmoura.medium.com/how-to-creating-a-report-in-power-bi-using-odata-to-connect-azure-devops-6090549f5f23)
 * [How to: Work Item Visualization report in Power BI using OData to connect Azure DevOps](https://vinijmoura.medium.com/how-to-work-item-visualization-report-in-power-bi-using-odata-to-connect-azure-devops-505afcc9a99a)
+* [How to: Team Settings Mapping on Azure DevOps](https://vinijmoura.medium.com/how-to-team-settings-mapping-on-azure-devops-ee609d217a3a)
 
 ### Azure Repos
 ![repos](./images/Repos.png) 
