@@ -29,6 +29,7 @@ Code Samples (applications, scripts, PowerBI reports, demos, etc.) to apply on A
 * [How to: Create Dashboard to visualize Environments and Deployments on Azure DevOps](https://vinijmoura.medium.com/how-to-create-dashboard-to-visualize-environments-and-deployments-on-azure-devops-319ddb1614f4)
 * [How to: Create Task Groups Dashboard on Azure DevOps](https://vinijmoura.medium.com/how-to-create-task-groups-dashboard-on-azure-devops-a4a388d2426d)
 * [How to: Environments, Approvals, and Checks Mapping on Azure DevOps](https://vinijmoura.medium.com/how-to-environments-approvals-and-checks-mapping-on-azure-devops-5ac481f7c838)
+* [How to: Deployment Groups and Release Definitions Mapping on Azure DevOps](https://vinijmoura.medium.com/how-to-deployment-groups-and-release-definitions-mapping-on-azure-devops-5da07ae19f7d)
    
 ### Azure Artifacts
 ![artifacts](./images/Artifacts.png) 
