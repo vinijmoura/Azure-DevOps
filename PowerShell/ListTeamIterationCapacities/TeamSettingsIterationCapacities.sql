@@ -1,4 +1,3 @@
-/****** Object:  Table [dbo].[TeamSettingsBoards]    Script Date: 8/12/2021 7:33:47 PM ******/
 CREATE TABLE [dbo].[TeamSettingsIterationCapacities](
 	[TeamProjectName] [varchar](100) NOT NULL,
 	[TeamName] [varchar](100) NOT NULL,
