@@ -13,6 +13,7 @@ Code Samples (applications, scripts, PowerBI reports, demos, etc.) to apply on A
 * [How to: Team Settings Mapping on Azure DevOps](https://vinijmoura.medium.com/how-to-team-settings-mapping-on-azure-devops-ee609d217a3a)
 * [How to: Board Columns and Swimlanes Mapping on Azure DevOps](https://vinijmoura.medium.com/how-to-board-columns-and-swimlanes-mapping-on-azure-devops-bd7fbf94e43f)
 * [How to: Task Board Customize Columns Mapping on Azure DevOps](https://vinijmoura.medium.com/how-to-task-board-customize-columns-mapping-on-azure-devops-58adc07baca0)
+* [How to: Create Dashboard to visualize Teams and Iteration Capacities](https://vinijmoura.medium.com/how-to-create-dashboard-to-visualize-teams-and-iteration-capacities-2a8edfe2efc3)
 
 ### Azure Repos
 ![repos](./images/Repos.png) 
