@@ -58,6 +58,7 @@ Code Samples (applications, scripts, PowerBI reports, demos, etc.) to apply on A
 * [How to: Azure DevOps Service health using maps in Power BI](https://vinijmoura.medium.com/how-to-azure-devops-service-health-using-maps-in-power-bi-711bb7c657c2)
 * [How to: List all Users and Access Levels on Azure DevOps](https://vinijmoura.medium.com/how-to-list-all-users-access-levels-on-azure-devops-b98593bb123c)
 * [How to: Create Service Connections Dashboard on Azure DevOps](https://vinijmoura.medium.com/how-to-create-service-connections-dashboard-on-azure-devops-9708045ceba8)
+* [How to: List Installed Extensions on Azure DevOps](https://vinijmoura.medium.com/how-to-list-installed-extensions-on-azure-devops-7ee7b7f8725)
 
 ### GitHub
 ![github](./images/github.png) 
