@@ -32,6 +32,10 @@ Code Samples (applications, scripts, PowerBI reports, demos, etc.) to apply on A
 * [How to: Environments, Approvals, and Checks Mapping on Azure DevOps](https://vinijmoura.medium.com/how-to-environments-approvals-and-checks-mapping-on-azure-devops-5ac481f7c838)
 * [How to: Deployment Groups and Release Definitions Mapping on Azure DevOps](https://vinijmoura.medium.com/how-to-deployment-groups-and-release-definitions-mapping-on-azure-devops-5da07ae19f7d)
    
+### Azure Test Plans
+![testplans](./images/TestPlans.png) 
+* [How to: Test Plans Configurations Mapping on Azure DevOps](https://vinijmoura.medium.com/how-to-test-plans-configurations-mapping-on-azure-devops-b6bc8445a727)
+
 ### Azure Artifacts
 ![artifacts](./images/Artifacts.png) 
 * [How to: List all Feeds, Packages, and Versions at Azure Artifacts in Azure DevOps](https://vinijmoura.medium.com/how-to-list-all-feeds-packages-and-versions-at-azure-artifacts-in-azure-devops-ce511001d9f7)
