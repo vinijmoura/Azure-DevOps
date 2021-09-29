@@ -65,6 +65,7 @@ Code Samples (applications, scripts, PowerBI reports, demos, etc.) to apply on A
 * [How to: Create Service Connections Dashboard on Azure DevOps](https://vinijmoura.medium.com/how-to-create-service-connections-dashboard-on-azure-devops-9708045ceba8)
 * [How to: List Installed Extensions on Azure DevOps](https://vinijmoura.medium.com/how-to-list-installed-extensions-on-azure-devops-7ee7b7f8725)
 * [How to: Project Stats Mapping on Azure DevOps](https://vinijmoura.medium.com/how-to-project-stats-mapping-on-azure-devops-63ca0f0d4ca)
+* [How to: Personal Access Tokens Expiration Mapping](https://vinijmoura.medium.com/how-to-personal-access-tokens-expiration-mapping-5630e5db1f99)
 
 ### GitHub
 ![github](./images/github.png) 
