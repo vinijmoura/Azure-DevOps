@@ -51,11 +51,3 @@ Foreach ($project in $ProjectsResult.value)
         }
     }
 }
-
-
-
-    
-    
-    
-    
-    
