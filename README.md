@@ -33,6 +33,7 @@ Code Samples (applications, scripts, PowerBI reports, demos, etc.) to apply on A
 * [How to: Build Definitions and Tasks Mapping on Azure DevOps](https://vinijmoura.medium.com/how-to-build-definitions-and-tasks-mapping-on-azure-devops-ec3297bfe7d4)
 * [How to: Release Definitions and Tasks Mapping on Azure DevOps](https://vinijmoura.medium.com/how-to-release-definitions-and-tasks-mapping-on-azure-devops-8cca2bd3ef16)
 * [How to: List all Build Definitions and their latest executions on Azure DevOps](https://vinijmoura.medium.com/how-to-list-all-build-definitions-and-their-last-executions-3f590db35ceb)
+* [How to: List all Release Definitions and their latest executions on Azure DevOps](https://vinijmoura.medium.com/how-to-list-all-release-definitions-and-their-latest-executions-on-azure-devops-3d637a6a256e)
    
 ## Azure Test Plans
 ![testplans](./images/TestPlans.png) 
