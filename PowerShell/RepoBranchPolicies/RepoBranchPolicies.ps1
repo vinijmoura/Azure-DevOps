@@ -19,7 +19,7 @@ $Build = "Build"
 echo $PAT | az devops login --org $Organization
 
 az devops configure --defaults organization=$Organization
-$ProjectsResult = az devops project list --org $Organization | ConvertFrom-Json
+$ProjectsResult = az devops project list --org $Organization --top 500 | ConvertFrom-Json
 
 Foreach ($project in $ProjectsResult.value)
 {
