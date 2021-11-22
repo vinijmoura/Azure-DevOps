@@ -22,6 +22,7 @@
 *  [How to: Viewing which repositories have branch policies on Azure DevOps](https://vinijmoura.medium.com/how-to-viewing-which-repositories-have-branch-policies-on-azure-devops-c9bfb370401e)
 *  [How to: Create Pull Requests Dashboard on Azure DevOps](https://vinijmoura.medium.com/how-to-create-pull-requests-dashboard-on-azure-devops-ff3befad1000)
 *  [How to: Create Dashboard to visualize Branches ahead/behind](https://vinijmoura.medium.com/how-to-create-dashboard-to-visualize-branches-ahead-behind-6154cad4308d)
+*  [How to: Azure Repos Health Check on Azure DevOps](https://vinijmoura.medium.com/how-to-azure-repos-health-check-on-azure-devops-5b0322c7295c)
    
 ## Azure Pipelines
 ![pipelines](./images/Pipelines.png) 
