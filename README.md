@@ -53,6 +53,7 @@
 * [How to: List all Process Templates and respective Team Projects on Azure DevOps](https://vinijmoura.medium.com/how-to-list-all-process-templates-and-respective-team-projects-on-azure-devops-1a2177ef0ba1)
 * [How to: Process Templates, Work Item Types, and Fields Mapping on Azure DevOps](https://vinijmoura.medium.com/how-to-process-templates-work-item-types-and-fields-mapping-on-azure-devops-dc03ea31debe)
 * [How to: Process Templates, Work Item Types and Custom Rules Mapping on Azure DevOps](https://vinijmoura.medium.com/how-to-process-templates-work-item-types-and-custom-rules-mapping-on-azure-devops-a36a2e91b88d)
+* [How to: Area and Iteration organization charts on Azure DevOps](https://vinijmoura.medium.com/how-to-area-and-iteration-organization-charts-on-azure-devops-8a52dd79480f)
      
 ## Permissions
 ![permissions](./images/Permissions.png) 
