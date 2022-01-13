@@ -1,4 +1,4 @@
-***Code Samples (applications, scripts, PowerBI reports, demos, etc.) to apply on Azure DevOps and GitHub***
+***Code Samples (applications, scripts, PowerBI reports, demos, etc.) to apply on Azure DevOps***
 
 # Azure DevOps
 ![azuredevops](./images/AzureDevOps.png)
@@ -76,14 +76,3 @@
 * [How to: Project Stats Mapping on Azure DevOps](https://vinijmoura.medium.com/how-to-project-stats-mapping-on-azure-devops-63ca0f0d4ca)
 * [How to: Personal Access Tokens Expiration Mapping](https://vinijmoura.medium.com/how-to-personal-access-tokens-expiration-mapping-5630e5db1f99)
 * [How to: Service Hooks Mapping on Azure DevOps](https://vinijmoura.medium.com/how-to-service-hooks-mapping-on-azure-devops-f8275160af20)
-
-# GitHub
-![github](./images/github.png)
-
-## Repositories
-![git](./images/Git.png)
-* [How to: List GitHub Repositories and master protection rules](https://vinijmoura.medium.com/how-to-list-github-repositories-and-master-protection-rules-a21d8b412d0b)
-
-## GitHub Actions
-![githubactions](./images/GitHubActions.png)
-* [How to: Create GitHub Action to deploy Azure Web App within Visual Studio](https://vinijmoura.medium.com/how-to-create-github-action-to-deploy-azure-web-app-within-visual-studio-edfad212c2da)
