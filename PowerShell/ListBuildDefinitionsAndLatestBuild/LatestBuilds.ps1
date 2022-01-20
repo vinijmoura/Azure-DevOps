@@ -36,7 +36,8 @@ Foreach ($project in $ProjectsResult.value)
                         BuildCommit,
                         BuildStartTime,
                         BuildTime,                
-                        BuildLink
+                        BuildLink,
+                        BuildBadge
                         )
                         VALUES(
                         '$($project.name)',
@@ -51,7 +52,8 @@ Foreach ($project in $ProjectsResult.value)
                         '$($LatestBuildResult.sourceVersion.Substring(1,6))',
                         CONVERT(DATETIME,SUBSTRING('$($LatestBuildResult.startTime)',1,19),127),
                         DATEDIFF(ss,'$($LatestBuildResult.startTime)','$($LatestBuildResult.finishTime)'),
-                        '$($LatestBuildResult._links.web.href)'
+                        '$($LatestBuildResult._links.web.href)',
+                        '$($LatestBuildResult._links.badge.href)'
                         )"
             Invoke-Sqlcmd -query $SQLQuery -ConnectionString $Connstr
         } 

@@ -11,6 +11,7 @@ CREATE TABLE [dbo].[LatestBuilds](
 	[BuildCommit] [varchar](10) NULL,
 	[BuildStartTime] [datetime] NULL,
 	[BuildTime] [int] NULL,
-	[BuildLink] [nvarchar](MAX) null
+	[BuildLink] [nvarchar](MAX) NULL,
+	[BuildBadge] [nvarchar](MAX) NULL
 )
 GO
