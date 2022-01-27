@@ -8,6 +8,9 @@ CREATE TABLE [dbo].[LatestReleases](
 	[ReleaseEnvironmentName] [varchar](150) NULL,
 	[ReleaseEnvironmentResult] [varchar](50) NULL,
 	[ReleaseEnvironmentReason] [varchar](50) NULL,
-	[ReleaseEnvironmentRequestedFor] [varchar](100) NULL
+	[ReleaseEnvironmentRequestedFor] [varchar](100) NULL,
+	[ReleaseEnvironmentRank] [tinyint] NULL,
+	[ReleaseEnvironmentBadge] [nvarchar](max) NULL,
+	[ReleaseEnvironmentBadgeEnabled] [bit] NULL
 )
 GO

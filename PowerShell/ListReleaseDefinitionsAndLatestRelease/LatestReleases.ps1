@@ -11,6 +11,7 @@ Invoke-Sqlcmd -query $SQLQuery -ConnectionString $Connstr
 $AzureDevOpsAuthenicationHeader = @{Authorization = 'Basic ' + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(":$($PAT)")) }
 $UriOrganization = "https://dev.azure.com/$($Organization)/"
 $uriReleases = "https://vsrm.dev.azure.com/$($Organization)/"
+[bool] $enabled = $true
 
 $uriProject = $UriOrganization + "_apis/projects?`$top=500"
 $ProjectsResult = Invoke-RestMethod -Uri $uriProject -Method get -Headers $AzureDevOpsAuthenicationHeader
@@ -26,6 +27,8 @@ Foreach ($project in $ProjectsResult.value)
         {
             Foreach ($environmentStatus in $LatestReleaseResult.value[0].environments)
             {
+                $EnvironmentBadge = $uriReleases + "_apis/public/Release/badge/$($project.id)/$($releaseDef.id)/$($environmentStatus.definitionEnvironmentId)"
+
                 $SQLQuery = "INSERT INTO LatestReleases (
                             TeamProjectName,
                             ReleaseDefinitionId,
@@ -36,7 +39,10 @@ Foreach ($project in $ProjectsResult.value)
                             ReleaseEnvironmentName,
                             ReleaseEnvironmentResult,
                             ReleaseEnvironmentReason,
-                            ReleaseEnvironmentRequestedFor
+                            ReleaseEnvironmentRequestedFor,
+                            ReleaseEnvironmentRank,
+                            ReleaseEnvironmentBadge,
+                            ReleaseEnvironmentBadgeEnabled
                             )
                             VALUES(
                             '$($project.name)',
@@ -48,7 +54,10 @@ Foreach ($project in $ProjectsResult.value)
                             '$($environmentStatus.name)',
                             '$($environmentStatus.deploySteps[0].status)',
                             '$($environmentStatus.deploySteps[0].reason)',
-                            '$($environmentStatus.deploySteps[0].requestedFor.displayName)'
+                            '$($environmentStatus.deploySteps[0].requestedFor.displayName)',
+                            $($environmentStatus.rank),
+                            '$($EnvironmentBadge)',
+                            '$($enabled)'
                             )"
                 Invoke-Sqlcmd -query $SQLQuery -ConnectionString $Connstr
             }
