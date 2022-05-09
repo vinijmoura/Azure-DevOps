@@ -11,14 +11,14 @@ This project aims to extract management information (Processes, Projects, Repos,
 ### Create Azure SQL Database
 This extraction needs it to be created a Azure SQL Server and Database to store the information extracted by running the PowerShell scripts
 
-This tutorial helps you to create this database
+This tutorial helps you to create this database:
 [Quickstart: Create an Azure SQL Database single database](https://docs.microsoft.com/en-us/azure/azure-sql/database/single-database-create-quickstart?tabs=azure-portal)
 
 |Database Name|
 |---|
 |azuredevopsreports|
 
-After creating the database, please access SQL Server Maangement Studio, connect **azuredevopsreports** database and run **01_CreateTables.sql** contained in the **SQLScripts** folder. This file will create the database tables.
+After creating the database, please access SQL Server Management Studio, connect **azuredevopsreports** database and run **01_CreateTables.sql** contained in the **SQLScripts** folder. This file will create the database tables.
 
 ```sql
 01_CreateTables.sql
