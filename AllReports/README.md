@@ -3,7 +3,7 @@ Data extraction and Power BI report that generate management informations about 
 
 ![architecture](./images/Architecture.png)
 
-### Azure DevOps Management Report
+### Azure DevOps Management Reports
 This project aims to extract management information (Processes, Projects, Repos, Build and Release Defintions, etc.) from Azure DevOps and present it in a single report.
 
 ## Get started - Configure Azure DevOps Management Reports
