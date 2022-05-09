@@ -29,15 +29,16 @@ After creating the database, please access SQL Server Management Studio, connect
 
 >- Name of Azure DevOps organization
 >- Create PAT (Personal Access Token) on your Azure DevOps organization. To create this PAT, access [Create a PAT](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat) link. Important: Give a **Full access** scope to this PAT.
->- Get the Connection String from the database created in the previous step
+>- Get the **Connection String** from the **Azure SQL Database** created in the previous step
 
-Please clone this repository and access AllReports\PowerShell folder
+Please clone this repository and access **AllReports\PowerShell** folder
 
 ```PowerShell
 cd .\AllReports\PowerShell
 ```
 
-After that, executes a file **Process.ps1**
+After that, executes a file **Process.ps1** on PowerShell or Visual Studio Code
+
 ```powershell
 .\Processes.ps1 -PAT {{PAT}} -Organization {{Organization}}  -Connstr {{Connection string from database}}
 ```
