@@ -9,7 +9,7 @@ This project aims to extract management information (Processes, Projects, Repos,
 ## Get started - Configure Azure DevOps Management Reports
 
 ### Create Azure SQL Database
-This extraction needs it to be created a Azure SQL Server and Database to store the information extracted by running the PowerShell scripts
+This extraction needs it to be created an Azure SQL Server and Database to store the information extracted by running the PowerShell scripts
 
 This tutorial helps you to create this database:
 [Quickstart: Create an Azure SQL Database single database](https://docs.microsoft.com/en-us/azure/azure-sql/database/single-database-create-quickstart?tabs=azure-portal)
