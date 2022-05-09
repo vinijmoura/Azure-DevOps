@@ -39,33 +39,34 @@ cd .\AllReports\PowerShell
 
 After that, executes a file **Process.ps1**
 ```powershell
-.\Processes.ps1 -PAT <<PAT>> -Organization <<Organization>>  -Connstr <<Connection string from database>>
+.\Processes.ps1 -PAT {{PAT}} -Organization {{Organization}}  -Connstr {{Connection string from database}}
 ```
 
 At the end of execution, a log file will be generated showing all the data extraction performed.
 
 ### Configure Power BI Report
-- Open **OneReportToRuleThemAll.pbix** file which is located in the **PowerBI** folder
-
-- On the **Home** tab, select **Transform data**:
+- Open **OneReportToRuleThemAll.pbix** file which is located in the **PowerBI** folder. On the **Home** tab, select **Transform data**:
+  
   ![transformdata](./images/transformdata.png)
 
-
 - On **Queries** pane, select **Repositories** table:
+  
   ![queries](./images/Queries.png)
-
-
+  
 - On **Query Settings** pane, click on **configurations**
+
   ![querysettings](./images/Query_Settings.png)
 
 
 - On **SQL Server database**, enter the database server name and the database name.
-  - Server: <<mysqlserver>>.database.windows.net:1433
+  - Server: {{mysqlserver}}.database.windows.net:1433
   - Database (optional): azuredevopsreports
+  
   ![server_and_database](./images/server_and_database.png)
 
 
 - On **SQL Server database**, Database tab, enter user name and password to access SQL Database:
+  
   ![user_and_password](./images/user_and_password.png)
 
 - On **Home** tab, Click on **Close & Apply**
