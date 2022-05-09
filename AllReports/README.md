@@ -27,8 +27,8 @@ After creating the database, please access SQL Server Management Studio, connect
 ### Run PowerShell Scripts
 >After creating the database, you will need three information to run scripts:
 
->- Name of Azure DevOps organization
->- Create PAT (Personal Access Token) on your Azure DevOps organization. To create this PAT, access [Create a PAT](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat) link. Important: Give a **Full access** scope to this PAT.
+>- Name of **Azure DevOps organization**
+>- Create **PAT (Personal Access Token)** on your Azure DevOps organization. To create this PAT, access [Create a PAT](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat) link. Important: Give a **Full access** scope to this PAT.
 >- Get the **Connection String** from the **Azure SQL Database** created in the previous step
 
 Please clone this repository and access **AllReports\PowerShell** folder
@@ -73,7 +73,7 @@ At the end of execution, a log file will be generated showing all the data extra
 - On **Home** tab, Click on **Close & Apply**
 
 ### Access Report
-After Power BI configuration, you will have access to a lot of information about your Azure DevOps organization.
+After **Power BI configuration**, you will have access to a lot of information about your Azure DevOps organization.
 
 ![AzureDevOpsReport](./images/AzureDevOpsReport.png)
 
