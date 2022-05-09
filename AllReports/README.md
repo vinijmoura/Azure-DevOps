@@ -28,8 +28,8 @@ After creating the database, please access SQL Server Management Studio, connect
 >After creating the database, you will need three information to run scripts:
 
 >- Name of **Azure DevOps organization**
->- Create **PAT (Personal Access Token)** on your Azure DevOps organization. To create this PAT, access [Create a PAT](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat) link. Important: Give a **Full access** scope to this PAT.
->- Get the **Connection String** from the **Azure SQL Database** created in the previous step
+>- **PAT (Personal Access Token)** - To create PAT on your Azure DevOps organization, access [Create a PAT](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat) link. Important: Give a **Full access** scope to this PAT.
+>- **Connection String** - Get the connection string from the **Azure SQL Database** created in the previous step
 
 Please clone this repository and access **AllReports\PowerShell** folder
 
