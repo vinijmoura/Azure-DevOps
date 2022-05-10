@@ -66,14 +66,14 @@ At the end of execution, a log file will be generated showing all the data extra
   ![querysettings](./images/Query_Settings.png)
 
 
-- On **SQL Server database**, enter the database server name and the database name.
+- On **SQL Server database**, enter the **database server name** and the **database name**.
   - Server: {{mysqlserver}}.database.windows.net:1433
   - Database (optional): azuredevopsreports
   
   ![server_and_database](./images/server_and_database.png)
 
 
-- On **SQL Server database**, Database tab, enter user name and password to access SQL Database:
+- On **SQL Server database**, Database tab, enter **user name** and **password** to access SQL Database:
   
   ![user_and_password](./images/user_and_password.png)
 
