@@ -82,8 +82,6 @@ At the end of execution, a log file will be generated showing all the data extra
 ## Access and explore Report Features
 After **Power BI configuration**, you will have access to a lot of information about your Azure DevOps organization.
 
-![AzureDevOpsReport](./images/AzureDevOpsReport.png)
-
 - [Process Templates, Work Item Types and Fields Mapping](https://vinijmoura.medium.com/how-to-process-templates-work-item-types-and-fields-mapping-on-azure-devops-dc03ea31debe)
 - [Process Templates and Projects](https://vinijmoura.medium.com/how-to-list-all-process-templates-and-respective-team-projects-on-azure-devops-1a2177ef0ba1)
 - [Project Stats](https://vinijmoura.medium.com/how-to-project-stats-mapping-on-azure-devops-63ca0f0d4ca)
@@ -96,3 +94,4 @@ After **Power BI configuration**, you will have access to a lot of information a
   - [Users and Access Levels](https://vinijmoura.medium.com/how-to-list-all-users-access-levels-on-azure-devops-b98593bb123c)
 - [Azure DevOps Services Health](https://vinijmoura.medium.com/how-to-azure-devops-service-health-using-maps-in-power-bi-711bb7c657c2)
 
+![AzureDevOpsReport](./images/AzureDevOpsReport.png)
