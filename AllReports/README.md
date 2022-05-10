@@ -25,6 +25,11 @@ After creating the database, please access SQL Server Management Studio, connect
 ```
 
 ### Run PowerShell Scripts
+Install Azure DevOps Extension
+To run scripts, it's necessary to install Azure DevOps Extension for Azure CLI
+- [Install the Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli). You must have at least `v2.0.69`, which you can verify with `az --version` command.
+- Add the Azure DevOps Extension `az extension add --name azure-devops`
+
 >After creating the database, you will need three information to run scripts:
 
 >- Name of **Azure DevOps organization**
