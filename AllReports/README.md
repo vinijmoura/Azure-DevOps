@@ -35,12 +35,12 @@ To run scripts, it's necessary to install [Azure DevOps Extension for Azure CLI]
   ```powershell
   az extension add --name azure-devops
   ```
+> [!NOTE]
+> After creating the database, you will need three information to run scripts:
 
->After creating the database, you will need three information to run scripts:
-
->- Name of **Azure DevOps organization**
->- **PAT (Personal Access Token)** - To create PAT on your Azure DevOps organization, access [Create a PAT](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat) link. Important: Give a **Full access** scope to this PAT.
->- **Connection String** - Get the connection string from the **Azure SQL Database** created in the previous step
+> - Name of **Azure DevOps organization**
+> - **PAT (Personal Access Token)** - To create PAT on your Azure DevOps organization, access [Create a PAT](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat) link. Important: Give a **Full access** scope to this PAT.
+> - **Connection String** - Get the connection string from the **Azure SQL Database** created in the previous step
 
 Please clone this repository and access **AllReports\PowerShell** folder
 
