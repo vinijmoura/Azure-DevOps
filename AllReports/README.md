@@ -1,5 +1,5 @@
 # Azure DevOps Management Reports
-Data extraction and Power BI report that generate management informations about your Azure DevOps organization.
+Data extraction and Power BI report that generate management informations about your Azure DevOps organization. Using [Azure DevOps CLI](https://docs.microsoft.com/en-us/azure/devops/cli/?view=azure-devops) and [Azure DevOps REST API](https://docs.microsoft.com/en-us/rest/api/azure/devops/?view=azure-devops-rest-7.1), PowerShell scripts extract data from [Azure DevOps](https://azure.microsoft.com/en-us/services/devops/), store this information in an Azure SQL Database and shows them in a Power BI report.
 
 ![architecture](./images/Architecture.png)
 
