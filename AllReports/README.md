@@ -35,7 +35,6 @@ To run scripts, it's necessary to install [Azure DevOps Extension for Azure CLI]
   ```powershell
   az extension add --name azure-devops
   ```
-> [!NOTE]
 > After creating the database, you will need three information to run scripts:
 
 > - Name of **Azure DevOps organization**
