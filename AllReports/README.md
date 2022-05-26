@@ -25,7 +25,15 @@ After creating the database, please access SQL Server Management Studio, connect
 ```
 
 ### Run PowerShell Scripts
-Install Azure DevOps Extension.
+Install Module SqlServer
+
+To run scripts, it's necessary to install the [ SQL Server PowerShell module](https://docs.microsoft.com/en-us/sql/powershell/download-sql-server-ps-module?view=sql-server-ver16)
+
+  ```powershell
+  Install-Module -Name SqlServer -Force
+  ```
+
+Install Azure DevOps Extension
 
 To run scripts, it's necessary to install [Azure DevOps Extension for Azure CLI](https://github.com/Azure/azure-devops-cli-extension)
 
