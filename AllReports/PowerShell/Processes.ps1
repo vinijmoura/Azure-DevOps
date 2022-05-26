@@ -6,6 +6,7 @@
 )
 
 Get-Date
+Import-Module -Name SqlServer
 
 $LogDate = (Get-Date).tostring("yyyyMMddHHmmss")
 $LogFile = $PSScriptRoot + "\" + $LogDate + ".log"
