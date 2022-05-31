@@ -20,6 +20,8 @@ DROP TABLE ProcessesWorkItemsFields
 GO
 DROP TABLE Processes
 GO
+DROP TABLE UsersPersonalAccessTokens
+GO
 DROP TABLE UsersGroups
 GO
 DROP TABLE Users

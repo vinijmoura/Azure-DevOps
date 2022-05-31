@@ -1,6 +1,7 @@
 ﻿Param
 (
     $PAT,
+    $AzureDevOpsAuthenicationHeader,
     $Organization,
     $db,
     $LogFile
@@ -51,7 +52,7 @@ foreach($au in $allUsers.members)
     foreach ($aug in $groups)
     {
         $usersGroupsObject = [PSCustomObject] [ordered]@{
-            principalName=$au.id
+            UserId=$au.id
             GroupName=$activeUserGroups.$aug.principalName
         }
         $UsersGroups.Add($usersGroupsObject)
@@ -60,5 +61,35 @@ foreach($au in $allUsers.members)
     {
         Write-SqlTableData -InputData $UsersGroups -InputObject $table
         & .\LogFile.ps1 -LogFile $LogFile -Message "Inserting Permission Groups to which user $($au.user.principalName) belongs on table UsersGroups"
+    }
+
+    $UsersPersonalAccessTokens = New-Object 'Collections.Generic.List[pscustomobject]'
+    $table = $db.Tables["UsersPersonalAccessTokens"]
+
+    $UriUserPAT = "https://vssps.dev.azure.com/$($Organization)/_apis/tokenadmin/personalaccesstokens/$($au.user.descriptor)?api-version=6.1-preview.1"
+    $UserPATResult = Invoke-RestMethod -Uri $UriUserPAT -Method get -Headers $AzureDevOpsAuthenicationHeader
+    Foreach ($up in $UserPATResult.value)
+    {
+        if ($up.scope -eq 'app_token')
+        {
+            $accessToken = 'Full access'
+        }
+        else
+        {
+            $accessToken = $up.scope.Replace(" ","`r`n")
+        }
+        $usersPersonalAccessTokensObject = [PSCustomObject] [ordered]@{
+            UserId=$au.id
+            PATDisplayName=$up.displayName
+            PATValidFrom=$up.validFrom
+            PATValidTo=$up.validTo
+            PATScope=$accessToken
+        }
+        $UsersPersonalAccessTokens.Add($usersPersonalAccessTokensObject)
+    }
+    if ($UsersPersonalAccessTokens.Count -gt 0)
+    {
+        Write-SqlTableData -InputData $UsersPersonalAccessTokens -InputObject $table
+        & .\LogFile.ps1 -LogFile $LogFile -Message "Inserting Personal Access Tokens belonging to user $($au.user.principalName) on table UsersPersonalAccessTokens"
     }
 }

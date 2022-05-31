@@ -24,6 +24,17 @@ CREATE TABLE [dbo].[UsersGroups]
 
 GO
 
+CREATE TABLE [dbo].[UsersPersonalAccessTokens](
+	UserId						VARCHAR(40)	NOT NULL,
+	PATDisplayName				VARCHAR(200) NOT NULL,
+	PATValidFrom				DATETIME NOT NULL,
+	PATValidTo					DATETIME NOT NULL,
+	PATScope					NVARCHAR(MAX) NOT NULL,
+	FOREIGN KEY (UserId)		REFERENCES Users(UserId),
+)
+
+GO
+
 CREATE TABLE [dbo].[Processes]
 (
 	ProcessTypeId                   VARCHAR(40) NOT NULL,
@@ -147,26 +158,26 @@ GO
 
 CREATE TABLE [dbo].[RepositoriesAheadBehind]
 (
-	[RepositoryId]							VARCHAR(40) NOT NULL,
-	[RepositoryBranchName]					VARCHAR(100) NOT NULL,
-	[RepositoryBranchAheadCount]			INT NOT NULL,
-	[RepositoryBranchBehindCount]			INT NOT NULL,
-	[RepositoryBranchIsBaseVersion]			BIT NOT NULL,
+	RepositoryId							VARCHAR(40) NOT NULL,
+	RepositoryBranchName					VARCHAR(100) NOT NULL,
+	RepositoryBranchAheadCount				INT NOT NULL,
+	RepositoryBranchBehindCount				INT NOT NULL,
+	RepositoryBranchIsBaseVersion			BIT NOT NULL,
 	FOREIGN KEY (RepositoryId)				REFERENCES Repositories(RepositoryId)
 )
 GO
 
 CREATE TABLE [dbo].[RepositoriesPullRequests]
 (
-	[RepositoryId]							VARCHAR(40) NOT NULL,
-	[PullRequestId]							INT NOT NULL,
-	[PullRequestTitle]						NVARCHAR(MAX) NOT NULL,
-	[PullRequestBranchSource]				VARCHAR(100) NOT NULL,
-	[PullRequestBranchTarget]				VARCHAR(100) NOT NULL,
-	[PullRequestCreatedBy]					VARCHAR(100) NOT NULL,
-	[PullRequestCreatedDate]				DATETIME NOT NULL,
-	[PullRequestStatus]						VARCHAR(50) NOT NULL,
-	[PullRequestReviewers]					NVARCHAR(MAX) NOT NULL,
+	RepositoryId							VARCHAR(40) NOT NULL,
+	PullRequestId							INT NOT NULL,
+	PullRequestTitle						NVARCHAR(MAX) NOT NULL,
+	PullRequestBranchSource					VARCHAR(100) NOT NULL,
+	PullRequestBranchTarget					VARCHAR(100) NOT NULL,
+	PullRequestCreatedBy					VARCHAR(100) NOT NULL,
+	PullRequestCreatedDate					DATETIME NOT NULL,
+	PullRequestStatus						VARCHAR(50) NOT NULL,
+	PullRequestReviewers					NVARCHAR(MAX) NOT NULL,
 	FOREIGN KEY (RepositoryId)				REFERENCES Repositories(RepositoryId)
 )
 GO
