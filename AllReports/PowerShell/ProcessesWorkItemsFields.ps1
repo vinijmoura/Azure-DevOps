@@ -4,6 +4,7 @@
     $Organization,
     $db,
     $processtypeId,
+    $processName,
     $LogFile
 )
 $UriOrganization = "https://dev.azure.com/$($Organization)/" 
@@ -35,4 +36,4 @@ Foreach ($wit in $workItemTypesResult.value)
 }
 
 Write-SqlTableData -InputData $ProcessesWorkItemsFields -InputObject $table -Force
-& .\LogFile.ps1 -LogFile $LogFile -Message "Inserting Processes Templates, Work Item Types and Fields to which processId $($processtypeId) belongs on table ProcessesWorkItemsFields"
+& .\LogFile.ps1 -LogFile $LogFile -Message "Inserting Processes Templates, Work Item Types and Fields to which processId $($processtypeId) and ProcessName $($processName) belongs on table ProcessesWorkItemsFields"

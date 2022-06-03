@@ -4,6 +4,7 @@ Param
     $Organization,
     $db,
     $projectId,
+    $projectName,
     $LogFile
 )
 
@@ -59,7 +60,7 @@ Foreach ($repo in $RepositoriesResult.value)
         }
         $Repositories.Add($repoObject)
         Write-SqlTableData -InputData $Repositories -InputObject $table
-        & .\LogFile.ps1 -LogFile $LogFile -Message "Inserting repository: $($repo.name) from the project $($projectId) on table Repositories"
+        & .\LogFile.ps1 -LogFile $LogFile -Message "Inserting repository: $($repo.name) from the project $($projectName) on table Repositories"
 
         $RepositoriesAheadBehind = New-Object 'Collections.Generic.List[pscustomobject]'
         $table = $db.Tables["RepositoriesAheadBehind"]
@@ -84,7 +85,7 @@ Foreach ($repo in $RepositoriesResult.value)
             if ($RepositoriesAheadBehind.Count -gt 0)
             {
                 Write-SqlTableData -InputData $RepositoriesAheadBehind -InputObject $table
-                & .\LogFile.ps1 -LogFile $LogFile -Message "Inserting Commits Ahead/Behind to which project $($projectId) and repository $($repo.name) belongs on table RepositoriesAheadBehind"
+                & .\LogFile.ps1 -LogFile $LogFile -Message "Inserting Commits Ahead/Behind to which project $($projectName) and repository $($repo.name) belongs on table RepositoriesAheadBehind"
             }
         }
 
@@ -123,7 +124,7 @@ Foreach ($repo in $RepositoriesResult.value)
         if ($RepositoriesPullRequests.Count)
         {
             Write-SqlTableData -InputData $RepositoriesPullRequests -InputObject $table
-            & .\LogFile.ps1 -LogFile $LogFile -Message "Inserting Pull Requests to which project $($projectId) and repository $($repo.name) belongs on table RepositoriesPullRequests"
+            & .\LogFile.ps1 -LogFile $LogFile -Message "Inserting Pull Requests to which project $($projectName) and repository $($repo.name) belongs on table RepositoriesPullRequests"
         }
     }
 }

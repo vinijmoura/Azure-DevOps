@@ -43,7 +43,7 @@ Foreach ($process in $ProcessResult.value)
     & .\LogFile.ps1 -LogFile $LogFile -Message "Inserting Process Template: $($process.name) on table Processes"
 
     #INSERT ProcessesWorkItemsFields
-    & .\ProcessesWorkItemsFields.ps1 -AzureDevOpsAuthenicationHeader $AzureDevOpsAuthenicationHeader -Organization $Organization -db $db -processtypeId $process.typeId -LogFile $LogFile
+    & .\ProcessesWorkItemsFields.ps1 -AzureDevOpsAuthenicationHeader $AzureDevOpsAuthenicationHeader -Organization $Organization -db $db -processtypeId $process.typeId -processName $process.name -LogFile $LogFile
     
     Foreach ($project in $process.projects)
     {
@@ -51,10 +51,10 @@ Foreach ($process in $ProcessResult.value)
         & .\Projects.ps1 -AzureDevOpsAuthenicationHeader $AzureDevOpsAuthenicationHeader -Organization $Organization -db $db -projectId $project.id -projectName $project.name -processtypeId $process.typeId -LogFile $LogFile
 
         #INSERT Teams
-        & .\Teams.ps1 -AzureDevOpsAuthenicationHeader $AzureDevOpsAuthenicationHeader -Organization $Organization -db $db -projectId $project.id -LogFile $LogFile
+        & .\Teams.ps1 -AzureDevOpsAuthenicationHeader $AzureDevOpsAuthenicationHeader -Organization $Organization -db $db -projectId $project.id -projectName $project.name -LogFile $LogFile
 
         #INSERT Repositories
-        & .\Repos.ps1 -AzureDevOpsAuthenicationHeader $AzureDevOpsAuthenicationHeader -Organization $Organization -db $db -projectId $project.id -LogFile $LogFile
+        & .\Repos.ps1 -AzureDevOpsAuthenicationHeader $AzureDevOpsAuthenicationHeader -Organization $Organization -db $db -projectId $project.id -projectName $project.name -LogFile $LogFile
     }
 }
 

@@ -4,6 +4,7 @@
     $Organization,
     $db,
     $projectId,
+    $projectName,
     $LogFile
 )
 
@@ -28,7 +29,7 @@ Foreach ($team in $TeamsResult.value)
     }
     $Teams.Add($teamObject)
     Write-SqlTableData -InputData $Teams -InputObject $table
-    & .\LogFile.ps1 -LogFile $LogFile -Message "Inserting team: $($team.name) from the project $($projectId) on table Teams"
+    & .\LogFile.ps1 -LogFile $LogFile -Message "Inserting team: $($team.name) from the project $($projectName) on table Teams"
     
     [array]$backlogVisibilities = ($TeamSettingsResult.backlogVisibilities | Get-Member -MemberType NoteProperty).Name
     Foreach ($blv in $backlogVisibilities)
@@ -47,7 +48,7 @@ Foreach ($team in $TeamsResult.value)
             }
             $TeamsBackLogLevels.Add($teamBackLogLevelsObject)
             Write-SqlTableData -InputData $TeamsBackLogLevels -InputObject $table
-            & .\LogFile.ps1 -LogFile $LogFile -Message "Inserting BackLogLevel: $($backLogLevelResult.name) from the project $($projectId) and team $($team.name) on table TeamsBackLogLevels"
+            & .\LogFile.ps1 -LogFile $LogFile -Message "Inserting BackLogLevel: $($backLogLevelResult.name) from the project $($projectName) and team $($team.name) on table TeamsBackLogLevels"
 
             $TeamsBoardColumns = New-Object 'Collections.Generic.List[pscustomobject]'
             $table = $db.Tables["TeamsBoardColumns"]
@@ -87,7 +88,7 @@ Foreach ($team in $TeamsResult.value)
             if ($TeamsBoardColumns.Count -gt 0)
             {
                 Write-SqlTableData -InputData $TeamsBoardColumns -InputObject $table
-                & .\LogFile.ps1 -LogFile $LogFile -Message "Inserting Team Board Columns to which project $($projectId) and team $($team.name) belongs on table TeamsBoardColumns"
+                & .\LogFile.ps1 -LogFile $LogFile -Message "Inserting Team Board Columns to which project $($projectName) and team $($team.name) belongs on table TeamsBoardColumns"
             }
 
             $TeamsBoardLanes = New-Object 'Collections.Generic.List[pscustomobject]'
@@ -108,7 +109,7 @@ Foreach ($team in $TeamsResult.value)
             if ($TeamsBoardLanes.Count -gt 0)
             {
                 Write-SqlTableData -InputData $TeamsBoardLanes -InputObject $table
-                & .\LogFile.ps1 -LogFile $LogFile -Message "Inserting Team Board Lanes to which project $($projectId) and team $($team.name) belongs on table TeamsBoardLanes"
+                & .\LogFile.ps1 -LogFile $LogFile -Message "Inserting Team Board Lanes to which project $($projectName) and team $($team.name) belongs on table TeamsBoardLanes"
             }
         }
     }
@@ -128,6 +129,6 @@ Foreach ($team in $TeamsResult.value)
     if ($TeamsWorkingDays.Count)
     {
         Write-SqlTableData -InputData $TeamsWorkingDays -InputObject $table
-        & .\LogFile.ps1 -LogFile $LogFile -Message "Inserting Team Board Working Days to which project $($projectId) and team $($team.name) belongs on table TeamsWorkingDays"
+        & .\LogFile.ps1 -LogFile $LogFile -Message "Inserting Team Board Working Days to which project $($projectName) and team $($team.name) belongs on table TeamsWorkingDays"
     }
 }
