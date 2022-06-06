@@ -1,3 +1,12 @@
+CREATE TABLE [dbo].[InstalledExtensions](
+	ExtensionId					VARCHAR(100) NOT NULL,
+	ExtensionName				VARCHAR(100) NOT NULL,
+	ExtensionPublisherName		VARCHAR(100) NOT NULL,
+	ExtensionVersion			VARCHAR(40) NOT NULL,
+	ExtensionLastPublished		DATETIME NOT NULL
+)
+GO
+
 CREATE TABLE [dbo].[Users]
 (
 	UserId						VARCHAR(40) NOT NULL,

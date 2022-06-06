@@ -26,3 +26,5 @@ DROP TABLE UsersGroups
 GO
 DROP TABLE Users
 GO
+DROP TABLE InstalledExtensions
+GO

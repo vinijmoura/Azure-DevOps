@@ -22,6 +22,8 @@ $db = $srv.Databases["azuredevopsreports"]
 $AzureDevOpsAuthenicationHeader = @{Authorization = 'Basic ' + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(":$($PAT)")) } + @{"Content-Type"="application/json"; "Accept"="application/json"}
 $UriOrganization = "https://dev.azure.com/$($Organization)/"
 
+& .\Extensions.ps1 -AzureDevOpsAuthenicationHeader $AzureDevOpsAuthenicationHeader -Organization $Organization -db $db -LogFile $LogFile
+
 & .\Users.ps1 -PAT $PAT -AzureDevOpsAuthenicationHeader $AzureDevOpsAuthenicationHeader -Organization $Organization -db $db -LogFile $LogFile
 
 $table = $db.Tables["Processes"]
