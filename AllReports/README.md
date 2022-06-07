@@ -95,6 +95,8 @@ At the end of execution, a log file will be generated showing all the data extra
 ## Access and explore Report Features
 After **Power BI configuration**, you will have access to a lot of information about your Azure DevOps organization.
 
+![AzureDevOpsReport](./images/AzureDevOpsReport.png)
+
 - Azure Boards
   - [Team Settings](https://vinijmoura.medium.com/how-to-team-settings-mapping-on-azure-devops-ee609d217a3a)
   - [Team Board Columns and Swimlanes](https://vinijmoura.medium.com/how-to-board-columns-and-swimlanes-mapping-on-azure-devops-bd7fbf94e43f)
@@ -112,5 +114,3 @@ After **Power BI configuration**, you will have access to a lot of information a
   - [Azure DevOps Services Health](https://vinijmoura.medium.com/how-to-azure-devops-service-health-using-maps-in-power-bi-711bb7c657c2)
   - [Personal Access Tokens Expiration Mapping](https://vinijmoura.medium.com/how-to-personal-access-tokens-expiration-mapping-5630e5db1f99)
   - [Installed Extensions](https://vinijmoura.medium.com/how-to-list-installed-extensions-on-azure-devops-7ee7b7f8725)
-
-![AzureDevOpsReport](./images/AzureDevOpsReport.png)
