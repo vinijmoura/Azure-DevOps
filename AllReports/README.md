@@ -24,6 +24,8 @@ After creating the database, please access SQL Server Management Studio, connect
 01_CreateTables.sql
 ```
 
+![MER](./images/MER.png)
+
 ### Run PowerShell Scripts
 Install Module SqlServer
 
@@ -65,6 +67,7 @@ At the end of execution, a log file will be generated showing all the data extra
 
 ![logfileexample](./images/LogFileExample.png)
 
+
 ### Configure Power BI Report
 - Open **OneReportToRuleThemAll.pbix** file which is located in the **PowerBI** folder. On the **Home** tab, select **Transform data**:
   
@@ -91,7 +94,6 @@ At the end of execution, a log file will be generated showing all the data extra
   ![user_and_password](./images/user_and_password.png)
 
 - On **Home** tab, Click on **Close & Apply**
-
 ## Access and explore Report Features
 After **Power BI configuration**, you will have access to a lot of information about your Azure DevOps organization.
 
