@@ -1,4 +1,4 @@
-***Code Samples (applications, scripts, PowerBI reports, demos, etc.) to apply on Azure DevOps***
+***Data extraction and Power BI report that generate management informations about your Azure DevOps organization. Using Azure DevOps CLI and Azure DevOps REST API, PowerShell scripts extract data from Azure DevOps, store this information in an Azure SQL Database and shows them in a Power BI report.***
 
 # Azure DevOps
 ![azuredevops](./images/AzureDevOps.png)
