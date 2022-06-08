@@ -90,7 +90,7 @@ At the end of execution, a log file will be generated showing all the data extra
   ![server_and_database](./images/server_and_database.png)
 
 
-- On **SQL Server database**, Database tab, enter **user name** and **password** to access SQL Database:
+- On **SQL Server database**, Database tab, enter **User name** and **Password** to access SQL Database:
   
   ![user_and_password](./images/user_and_password.png)
 
