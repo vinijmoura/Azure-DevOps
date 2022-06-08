@@ -48,8 +48,9 @@ To run scripts, it's necessary to install [Azure DevOps Extension for Azure CLI]
 > After creating the database, you will need three information to run scripts:
 
 > - Name of **Azure DevOps organization**
-> - **PAT (Personal Access Token)** - To create PAT on your Azure DevOps organization, access [Create a PAT](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat) link. Important: Give a **Full access** scope to this PAT.
+> - **PAT (Personal Access Token)** - To create PAT on your Azure DevOps organization, access [Create a PAT](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat). Important: Give a **Full access** scope to this PAT.
 > - **Connection String** - Get the connection string from the **Azure SQL Database** created in the previous step
+>   - **Example** - *Server=tcp:{{sqlserver}}.database.windows.net,1433;Initial Catalog=azuredevopsreports;Persist Security Info=False;User ID={{SQL User Name}};Password={{Password}};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;*
 
 Please clone this repository and access **AllReports\PowerShell** folder
 
@@ -83,7 +84,7 @@ At the end of execution, a log file will be generated showing all the data extra
 
 
 - On **SQL Server database**, enter the **database server name** and the **database name**.
-  - Server: {{mysqlserver}}.database.windows.net:1433
+  - Server: {{sqlserver}}.database.windows.net:1433
   - Database (optional): azuredevopsreports
   
   ![server_and_database](./images/server_and_database.png)
