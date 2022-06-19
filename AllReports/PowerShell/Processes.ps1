@@ -22,13 +22,18 @@ $db = $srv.Databases["azuredevopsreports"]
 $AzureDevOpsAuthenicationHeader = @{Authorization = 'Basic ' + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(":$($PAT)")) } + @{"Content-Type"="application/json"; "Accept"="application/json"}
 $UriOrganization = "https://dev.azure.com/$($Organization)/"
 
+#INSERT FeedPackageVersions
+& .\FeedPackageVersions.ps1 -AzureDevOpsAuthenicationHeader $AzureDevOpsAuthenicationHeader -Organization $Organization -db $db -LogFile $LogFile
+
+#INSERT InstalledExtensions
 & .\Extensions.ps1 -AzureDevOpsAuthenicationHeader $AzureDevOpsAuthenicationHeader -Organization $Organization -db $db -LogFile $LogFile
 
+#INSERT Users and UsersGroups
 & .\Users.ps1 -PAT $PAT -AzureDevOpsAuthenicationHeader $AzureDevOpsAuthenicationHeader -Organization $Organization -db $db -LogFile $LogFile
 
 $table = $db.Tables["Processes"]
 
-#INSERT Processess Table
+#INSERT Processess
 $uriProcess = $UriOrganization + "_apis/work/processes?`$expand=projects"
 $ProcessResult = Invoke-RestMethod -Uri $uriProcess -Method get -Headers $AzureDevOpsAuthenicationHeader
 Foreach ($process in $ProcessResult.value)

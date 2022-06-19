@@ -1,3 +1,18 @@
+CREATE TABLE [dbo].[FeedPackageVersions](
+	FeedId									VARCHAR(40) NOT NULL,
+	FeedName								VARCHAR(100) NOT NULL,
+	FeedDescription							NVARCHAR(MAX) NOT NULL,
+	FeedPackageName							VARCHAR(100) NOT NULL,
+	FeedPackageType							VARCHAR(30) NOT NULL,
+	FeedPackageSource						VARCHAR(30) NOT NULL,
+	FeedPackageVersion						VARCHAR(50) NOT NULL,
+	FeedPackageVersionLatest				BIT NOT NULL,
+	FeedPackageVersionDate					DATETIME NOT NULL,
+	FeedPackageVersionDownloadCount			INT NOT NULL,
+	FeedPackageVersionDownloadUniqueUsers	INT NOT NULL
+) ON [PRIMARY]
+GO
+
 CREATE TABLE [dbo].[InstalledExtensions](
 	ExtensionId					VARCHAR(100) NOT NULL,
 	ExtensionName				VARCHAR(100) NOT NULL,

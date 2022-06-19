@@ -18,6 +18,7 @@ This tutorial helps you to create this database:
 |---|
 |azuredevopsreports|
 
+### Create Database strucuture (tables)
 After creating the database, please access SQL Server Management Studio, connect **azuredevopsreports** database and run **01_CreateTables.sql** contained in the **SQLScripts** folder. This file will create the database tables.
 
 ```sql
@@ -107,6 +108,9 @@ After **Power BI configuration**, you will have access to a lot of information a
 ![repos](../images/Repos.png)
   - [Azure Repos Health Check](https://vinijmoura.medium.com/how-to-azure-repos-health-check-on-azure-devops-5b0322c7295c)
   - [Branch Policies](https://vinijmoura.medium.com/how-to-viewing-which-repositories-have-branch-policies-on-azure-devops-c9bfb370401e)
+
+![artifacts](../images/Artifacts.png)
+  - [Feeds, Packages, and Versions](https://vinijmoura.medium.com/how-to-list-all-feeds-packages-and-versions-at-azure-artifacts-in-azure-devops-ce511001d9f7)
 
 ![process](../images/Process.png)
   - [Process Templates, Work Item Types and Fields Mapping](https://vinijmoura.medium.com/how-to-process-templates-work-item-types-and-fields-mapping-on-azure-devops-dc03ea31debe)

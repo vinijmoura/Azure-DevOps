@@ -28,3 +28,5 @@ DROP TABLE Users
 GO
 DROP TABLE InstalledExtensions
 GO
+DROP TABLE FeedPackageVersions
+GO
