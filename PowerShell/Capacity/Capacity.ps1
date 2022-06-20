@@ -15,7 +15,7 @@ enum DayTypes {
 $AzureDevOpsAuthenicationHeader = @{Authorization = 'Basic ' + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(":$($PAT)")) }
 $UriOrganization = "https://dev.azure.com/$($Organization)/"
 
-$uriProject = $UriOrganization + "_apis/projects/"
+$uriProject = $UriOrganization + "_apis/projects?`$top=500"
 $ProjectsResult = Invoke-RestMethod -Uri $uriProject -Method get -Headers $AzureDevOpsAuthenicationHeader
 Foreach ($project in $ProjectsResult.value)
 {
@@ -58,7 +58,7 @@ Foreach ($project in $ProjectsResult.value)
 
                 $uriCapacities = $UriOrganization + "$($project.id)/$($team.id)/_apis/work/teamsettings/iterations/$($sprintteam.id)/capacities"
                 $CapacitiesResult = Invoke-RestMethod -Uri $uriCapacities -Method get -Headers $AzureDevOpsAuthenicationHeader
-                Foreach ($capacity in $CapacitiesResult.value)
+                Foreach ($capacity in $CapacitiesResult.teamMembers)
                 {
                     $individualdaysoff = new-object 'Collections.Generic.List[DateTime]'
                     Foreach ($ido in $capacity.daysOff)
