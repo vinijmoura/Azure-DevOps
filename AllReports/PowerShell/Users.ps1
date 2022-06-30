@@ -12,7 +12,7 @@ $UriOrganization = "https://dev.azure.com/$($Organization)"
 echo $PAT | az devops login --org $UriOrganization
 az devops configure --defaults organization=$UriOrganization
 
-$allUsers = az devops user list --org $UriOrganization | ConvertFrom-Json
+$allUsers = az devops user list --org $UriOrganization --top 2000 | ConvertFrom-Json
 
 foreach($au in $allUsers.members)
 {
