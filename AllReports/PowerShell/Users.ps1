@@ -12,13 +12,19 @@ $UriOrganization = "https://dev.azure.com/$($Organization)"
 echo $PAT | az devops login --org $UriOrganization
 az devops configure --defaults organization=$UriOrganization
 
+$Users = New-Object 'Collections.Generic.List[pscustomobject]'
+$tableUsers = $db.Tables["Users"]
+
+$UsersGroups = New-Object 'Collections.Generic.List[pscustomobject]'
+$tableUsersGroups = $db.Tables["UsersGroups"]
+
+$UsersPersonalAccessTokens = New-Object 'Collections.Generic.List[pscustomobject]'
+$tableUsersPersonalAccessTokens = $db.Tables["UsersPersonalAccessTokens"]
+
 $allUsers = az devops user list --org $UriOrganization --top 2000 | ConvertFrom-Json
 
 foreach($au in $allUsers.members)
 {
-    $Users = New-Object 'Collections.Generic.List[pscustomobject]'
-    $table = $db.Tables["Users"]
-    
     if ($au.lastAccessedDate -eq '0001-01-01T00:00:00+00:00')
     {
         $LastDate = $au.dateCreated
@@ -27,8 +33,6 @@ foreach($au in $allUsers.members)
     {
         $LastDate = $au.lastAccessedDate
     }
-
-    
     $usersObject = [PSCustomObject] [ordered]@{
         UserId=$au.id
         UserPrincipalName=$au.user.principalName
@@ -38,17 +42,11 @@ foreach($au in $allUsers.members)
         UserLastAccessedDate=$LastDate
         UserLicenseDisplayName=$au.accessLevel.licenseDisplayName
     }
-    
     $Users.Add($usersObject)
-    Write-SqlTableData -InputData $Users -InputObject $table
     & .\LogFile.ps1 -LogFile $LogFile -Message "Inserting user: $($au.user.principalName) on table Users"
     
     $activeUserGroups = az devops security group membership list --id $au.user.principalName --org $UriOrganization --relationship memberof | ConvertFrom-Json
     [array]$groups = ($activeUserGroups | Get-Member -MemberType NoteProperty).Name
-
-    $UsersGroups = New-Object 'Collections.Generic.List[pscustomobject]'
-    $table = $db.Tables["UsersGroups"]
-
     foreach ($aug in $groups)
     {
         $usersGroupsObject = [PSCustomObject] [ordered]@{
@@ -59,12 +57,8 @@ foreach($au in $allUsers.members)
     }
     if ($UsersGroups.Count -gt 0)
     {
-        Write-SqlTableData -InputData $UsersGroups -InputObject $table
         & .\LogFile.ps1 -LogFile $LogFile -Message "Inserting Permission Groups to which user $($au.user.principalName) belongs on table UsersGroups"
     }
-
-    $UsersPersonalAccessTokens = New-Object 'Collections.Generic.List[pscustomobject]'
-    $table = $db.Tables["UsersPersonalAccessTokens"]
 
     $UriUserPAT = "https://vssps.dev.azure.com/$($Organization)/_apis/tokenadmin/personalaccesstokens/$($au.user.descriptor)?api-version=6.1-preview.1"
     $UserPATResult = Invoke-RestMethod -Uri $UriUserPAT -Method get -Headers $AzureDevOpsAuthenicationHeader
@@ -89,7 +83,10 @@ foreach($au in $allUsers.members)
     }
     if ($UsersPersonalAccessTokens.Count -gt 0)
     {
-        Write-SqlTableData -InputData $UsersPersonalAccessTokens -InputObject $table
         & .\LogFile.ps1 -LogFile $LogFile -Message "Inserting Personal Access Tokens belonging to user $($au.user.principalName) on table UsersPersonalAccessTokens"
     }
 }
+
+Write-SqlTableData -InputData $Users -InputObject $tableUsers
+Write-SqlTableData -InputData $UsersGroups -InputObject $tableUsersGroups
+Write-SqlTableData -InputData $UsersPersonalAccessTokens -InputObject $tableUsersPersonalAccessTokens
