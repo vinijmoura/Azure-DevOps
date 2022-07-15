@@ -13,6 +13,8 @@ echo $PAT | az devops login --org $Organization
 Write-Host '===Configuring connection to organization and Team Project'
 az devops configure --defaults organization=$Organization project=$Project
 
+$StartDate = $StartDate.AddDays(0 - $StartDate.DayOfWeek.value__);
+
 For ($i=1; $i -le $NumberOfSprints; $i++) 
 {
     $Sprint = 'Sprint ' + $i
