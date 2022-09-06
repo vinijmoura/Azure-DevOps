@@ -1,4 +1,4 @@
-﻿Param
+Param
 (
     $PAT,
     $AzureDevOpsAuthenicationHeader,
@@ -25,9 +25,9 @@ $allUsers = az devops user list --org $UriOrganization --top 2000 | ConvertFrom-
 
 foreach($au in $allUsers.members)
 {
-    if ($au.lastAccessedDate -eq '01/01/0001 00:00:00')
+    if ($au.lastAccessedDate -eq '0001-01-01T00:00:00+00:00')
     {
-        $LastDate = ''01/01/1900 00:00:00''
+        $LastDate = $au.dateCreated
     }
     else
     {
