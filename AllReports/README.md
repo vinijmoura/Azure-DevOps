@@ -109,6 +109,9 @@ After **Power BI configuration**, you will have access to a lot of information a
   - [Azure Repos Health Check](https://vinijmoura.medium.com/how-to-azure-repos-health-check-on-azure-devops-5b0322c7295c)
   - [Branch Policies](https://vinijmoura.medium.com/how-to-viewing-which-repositories-have-branch-policies-on-azure-devops-c9bfb370401e)
 
+![pipelines](../images/Pipelines.png)
+  - [Environments, Checks, and Approvals](https://vinijmoura.medium.com/how-to-environments-approvals-and-checks-mapping-on-azure-devops-5ac481f7c838)
+
 ![artifacts](../images/Artifacts.png)
   - [Feeds, Packages, and Versions](https://vinijmoura.medium.com/how-to-list-all-feeds-packages-and-versions-at-azure-artifacts-in-azure-devops-ce511001d9f7)
 
