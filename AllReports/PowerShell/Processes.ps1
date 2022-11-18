@@ -62,6 +62,9 @@ Foreach ($process in $ProcessResult.value)
 
         #INSERT Repositories
         & .\Repos.ps1 -AzureDevOpsAuthenicationHeader $AzureDevOpsAuthenicationHeader -Organization $Organization -db $db -projectId $project.id -projectName $project.name -LogFile $LogFile
+
+        #INSERT EnvironmentsApprovalsChecks
+        & .\EnvironmentsApprovalsChecks.ps1 -AzureDevOpsAuthenicationHeader $AzureDevOpsAuthenicationHeader -Organization $Organization -db $db -projectId $project.id -projectName $project.name -LogFile $LogFile
     }
 }
 

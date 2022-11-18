@@ -9,6 +9,8 @@ Param
 )
 
 $UriOrganization = "https://dev.azure.com/$($Organization)/"
+echo $PAT | az devops login --org $UriOrganization
+az devops configure --defaults organization=$UriOrganization
 
 $minimumRev = "Minimum number of reviewers"
 $reqReviewers = "Required reviewers"

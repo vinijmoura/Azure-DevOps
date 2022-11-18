@@ -160,6 +160,17 @@ CREATE TABLE [dbo].[TeamsBoardLanes]
 ) 
 GO
 
+CREATE TABLE [dbo].[EnvironmentsApprovalsChecks]
+(
+	TeamProjectId					VARCHAR(40) NOT NULL,
+	EnvironmentId					INT NULL,
+	EnvironmentName					VARCHAR(150) NULL,
+	EnvironmentCheckName			VARCHAR(100) NULL,
+	EnvironmentCheckDisplayName		VARCHAR(100) NULL,
+	FOREIGN KEY (TeamProjectId)		REFERENCES Projects(TeamProjectId),
+) ON [PRIMARY]
+GO
+
 CREATE TABLE [dbo].[Repositories]
 (
 	TeamProjectId							VARCHAR(40) NOT NULL,

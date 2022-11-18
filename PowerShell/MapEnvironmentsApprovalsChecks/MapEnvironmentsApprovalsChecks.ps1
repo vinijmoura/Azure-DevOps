@@ -41,7 +41,7 @@ Foreach ($project in $ProjectsResult.value)
                 'Approval' { $envCheckDisplayName = 'Approvals' }
                 'ExclusiveLock' { $envCheckDisplayName = 'Exclusive Lock' }
                 'Task Check' { $envCheckDisplayName = $envcheck.settings.displayName }
-                deafult { $envCheckDisplayName = $envcheck.type.name }
+                default { $envCheckDisplayName = $envcheck.type.name }
 
             }
             $SQLQuery = "INSERT INTO EnvironmentsApprovalsChecks (

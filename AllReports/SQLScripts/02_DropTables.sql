@@ -14,6 +14,8 @@ DROP TABLE TeamsWorkingDays
 GO
 DROP TABLE Teams
 GO
+DROP TABLE EnvironmentsApprovalsChecks
+GO
 DROP TABLE Projects
 GO
 DROP TABLE ProcessesWorkItemsFields

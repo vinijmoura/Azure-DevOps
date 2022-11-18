@@ -7,8 +7,7 @@ Param
     $LogFile
 )
 
-$UriOrganization = "https://dev.azure.com/$($Organization)"
-
+$UriOrganization = "https://dev.azure.com/$($Organization)/"
 echo $PAT | az devops login --org $UriOrganization
 az devops configure --defaults organization=$UriOrganization
 
