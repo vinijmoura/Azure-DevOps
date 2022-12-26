@@ -33,7 +33,7 @@ $projectStatsBody = @{
         }
     }  | ConvertTo-Json -Depth 5
 
-$projectStatsResult = Invoke-WebRequest -Uri $uriProjectStats -Headers $AzureDevOpsAuthenicationHeader -Method Post -Body $projectStatsBody 
+$projectStatsResult = Invoke-WebRequest -Uri $uriProjectStats -Headers $AzureDevOpsAuthenicationHeader -Method Post -Body $projectStatsBody -UseBasicParsing 
 $projectStatsJson = ConvertFrom-Json $projectStatsResult.Content
 
 $workItemsCreated = 0
