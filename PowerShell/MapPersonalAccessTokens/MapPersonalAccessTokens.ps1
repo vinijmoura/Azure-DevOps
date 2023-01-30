@@ -1,14 +1,35 @@
-﻿Param
+﻿[CmdletBinding()]
+Param
 (
+    [Parameter(ParameterSetName = "Normal")]
+    [Parameter(ParameterSetName = "ActiveDirectory")]
     [string]$PAT,
+    [Parameter(ParameterSetName = "Normal")]
+    [Parameter(ParameterSetName = "ActiveDirectory")]
     [string]$Organization,
-    [string]$Connstr
+    [Parameter(ParameterSetName = "Normal")]
+    [Parameter(ParameterSetName = "ActiveDirectory")]
+    [string]$Connstr,
+    [Parameter(ParameterSetName = "ActiveDirectory")]
+    [string]$ADDomainName,
+    [Parameter(ParameterSetName = "ActiveDirectory")]
+    [string]$ADAccountName
 )
 
 $SQLQuery = "TRUNCATE TABLE PersonalAccessTokens"
 Invoke-Sqlcmd -query $SQLQuery -ConnectionString $Connstr
 
-$AzureDevOpsAuthenicationHeader = @{Authorization = 'Basic ' + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(":$($PAT)")) }
+switch ($PsCmdlet.ParameterSetName) {
+    "ActiveDirectory" {
+        # Token pattern for an Azure Active Directory authenticated project is [AccountName]@[ADDomainName]:[PAT]. Ex: john.doe@company.com@12345ABCDEBlahToken
+        $AzureDevOpsAuthenicationHeader = @{Authorization = 'Basic ' + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes("$($ADAccountName)@$($ADDomainName):$($PAT)")) }
+    }
+    "Normal" {
+        # Token pattern for a non-Azure Active Directory authenticated project is [PAT]. Ex: 12345ABCDEBlahToken
+        $AzureDevOpsAuthenicationHeader = @{Authorization = 'Basic ' + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(":$($PAT)")) }
+    }
+}
+
 $UriUsers = "https://vssps.dev.azure.com/$($Organization)/_apis/graph/users?api-version=6.1-preview.1"
 $UsersResult = Invoke-RestMethod -Uri $UriUsers -Method get -Headers $AzureDevOpsAuthenicationHeader
 
