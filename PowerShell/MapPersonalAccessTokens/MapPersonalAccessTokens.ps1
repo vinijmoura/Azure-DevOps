@@ -21,7 +21,7 @@ Invoke-Sqlcmd -query $SQLQuery -ConnectionString $Connstr
 
 switch ($PsCmdlet.ParameterSetName) {
     "ActiveDirectory" {
-        # Token pattern for an Azure Active Directory authenticated project is [AccountName]@[ADDomainName]:[PAT]. Ex: john.doe@company.com@12345ABCDEBlahToken
+        # Token pattern for an Azure Active Directory authenticated project is [AccountName]@[ADDomainName]:[PAT]. Ex: john.doe@company.com:12345ABCDEBlahToken
         $AzureDevOpsAuthenicationHeader = @{Authorization = 'Basic ' + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes("$($ADAccountName)@$($ADDomainName):$($PAT)")) }
     }
     "Normal" {
