@@ -42,6 +42,7 @@ Data extraction and Power BI report that generate management informations about 
 * [How to: Build Badges Dashboard on Azure DevOps](https://vinijmoura.medium.com/how-to-build-badges-dashboard-on-azure-devops-90dcabb79c79)
 * [How to: Release Badges Dashboard on Azure DevOps](https://vinijmoura.medium.com/how-to-release-badges-dashboard-on-azure-devops-be54f7871d2d)
 * [How to: Deployment Groups and Target Machines Capabilities Mapping on Azure DevOps](https://vinijmoura.medium.com/how-to-deployment-groups-and-target-machines-capabilities-mapping-on-azure-devops-96d689b3c581)
+* [How to: Mapping YAML Multi-stage and Approvals Required on Azure DevOps](https://vinijmoura.medium.com/how-to-mapping-yaml-multi-stage-and-approvals-required-on-azure-devops-a967bab4a72b)
    
 ## Azure Test Plans
 ![testplans](./images/TestPlans.png) 
