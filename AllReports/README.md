@@ -71,25 +71,11 @@ At the end of execution, a log file will be generated showing all the data extra
 
 
 ### Configure Power BI Report
-- Open **OneReportToRuleThemAll.pbix** file which is located in the **PowerBI** folder. On the **Home** tab, select **Transform data**:
-  
-  ![transformdata](./images/transformdata.png)
-
-- On **Queries** pane, select **Repositories** table:
-  
-  ![queries](./images/Queries.png)
-  
-- On **Query Settings** pane, click on **configurations**
-
-  ![querysettings](./images/Query_Settings.png)
-
-
-- On **SQL Server database**, enter the **database server name** and the **database name**.
+- Open **OneReportToRuleThemAll.pbit** file which is located in the **PowerBI** folder and insert information about Azure SQL Server and database names:
   - Server: {{sqlserver}}.database.windows.net:1433
   - Database (optional): azuredevopsreports
-  
-  ![server_and_database](./images/server_and_database.png)
 
+  ![parameters](./images/parameters.png)
 
 - On **SQL Server database**, Database tab, enter **User name** and **Password** to access SQL Database:
   
