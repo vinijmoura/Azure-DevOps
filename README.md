@@ -81,3 +81,9 @@ Data extraction and Power BI report that generate management informations about 
 * [How to: Project Stats Mapping on Azure DevOps](https://vinijmoura.medium.com/how-to-project-stats-mapping-on-azure-devops-63ca0f0d4ca)
 * [How to: Personal Access Tokens Expiration Mapping](https://vinijmoura.medium.com/how-to-personal-access-tokens-expiration-mapping-5630e5db1f99)
 * [How to: Service Hooks Mapping on Azure DevOps](https://vinijmoura.medium.com/how-to-service-hooks-mapping-on-azure-devops-f8275160af20)
+
+# Contributors
+Special thanks to the following contributor(s) for this product:
+* [Ewerton Jordão](https://github.com/EwertonJordao)
+* [Miguel Nogueira](https://github.com/Miigg)
+* [Rafael Mendonça Pereira dos Santos](https://github.com/rafaelmpsantos)
