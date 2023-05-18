@@ -8,17 +8,17 @@
     $LogFile
 )
 $UriOrganization = "https://dev.azure.com/$($Organization)/" 
-$uriProcess = $UriOrganization + "_apis/work/processes/"
+$uriProcess = "$($UriOrganization)_apis/work/processes/"
 
 $table = $db.Tables["ProcessesWorkItemsFields"]
 
 $ProcessesWorkItemsFields = New-Object 'Collections.Generic.List[pscustomobject]'
 
-$uriWorkItemTypes = $uriProcess + "$($processtypeId)/workitemtypes/"
+$uriWorkItemTypes = "$($uriProcess)$($processtypeId)/workitemtypes/"
 $workItemTypesResult = Invoke-RestMethod -Uri $uriWorkItemTypes -Method get -Headers $AzureDevOpsAuthenicationHeader
 Foreach ($wit in $workItemTypesResult.value)
 {
-    $uriFields = $uriWorkItemTypes + "$($wit.referenceName)/fields"
+    $uriFields = "$($uriWorkItemTypes)$($wit.referenceName)/fields"
     $fieldsResult = Invoke-RestMethod -Uri $uriFields -Method get -Headers $AzureDevOpsAuthenicationHeader
     Foreach ($f in $fieldsResult.value)
     {

@@ -13,7 +13,7 @@ $UriOrganization = "https://dev.azure.com/$($Organization)/"
 $UriOrganizationRM = "https://vsrm.dev.azure.com/$($Organization)/"
 $monthAgo = (Get-Date).AddMonths(-1).ToString("yyyy-MM-dd")
 
-$uriProjectStats = $UriOrganization + "_apis/Contribution/HierarchyQuery/project/$($projectId)?api-version=6.1-preview.1"
+$uriProjectStats = "$($UriOrganization)_apis/Contribution/HierarchyQuery/project/$($projectId)?api-version=6.1-preview.1"
 $projectStatsBody = @{
     "contributionIds"= @("ms.vss-work-web.work-item-metrics-data-provider-verticals", "ms.vss-code-web.code-metrics-data-provider-verticals", "ms.vss-code-web.build-metrics-data-provider-verticals")
     "dataProviderContext" = @{
@@ -53,12 +53,12 @@ if (!$pullRequestsCreated) {$pullRequestsCreated = 0}
 $pullRequestsCompleted = $projectStatsJson.dataProviders.'ms.vss-code-web.code-metrics-data-provider-verticals'.gitmetrics.pullRequestsCompletedCount
 if (!$pullRequestsCompleted) {$pullRequestsCompleted = 0}
            
-$uriBuildMetrics = $UriOrganization + "$($projectId)/_apis/build/Metrics/Daily?minMetricsTime=$($monthAgo)" 
+$uriBuildMetrics = "$($UriOrganization)$($projectId)/_apis/build/Metrics/Daily?minMetricsTime=$($monthAgo)" 
 $buildMetricsResult = Invoke-RestMethod -Uri $uriBuildMetrics -Method get -Headers $AzureDevOpsAuthenicationHeader
 $totalBuilds = 0
 $buildMetricsResult.value | Where-Object {$_.name -eq 'TotalBuilds'} | ForEach-Object { $totalBuilds+= $_.intValue }
         
-$UriReleaseMetrics = $UriOrganizationRM + "$($projectId)/_apis/Release/metrics?minMetricsTime=minMetricsTime=$($monthAgo)"
+$UriReleaseMetrics = "$($UriOrganizationRM)$($projectId)/_apis/Release/metrics?minMetricsTime=minMetricsTime=$($monthAgo)"
 $releaseMetricsResult = Invoke-RestMethod -Uri $UriReleaseMetrics -Method get -Headers $AzureDevOpsAuthenicationHeader
 $totalReleases = 0
 $releaseMetricsResult.value | ForEach-Object { $totalReleases+= $_.value }

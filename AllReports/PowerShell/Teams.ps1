@@ -10,11 +10,11 @@
 
 $UriOrganization = "https://dev.azure.com/$($Organization)/"
 
-$uriTeams = $UriOrganization + "_apis/projects/$($projectId)/teams"
+$uriTeams = "$($UriOrganization)_apis/projects/$($projectId)/teams"
 $TeamsResult = Invoke-RestMethod -Uri $uriTeams -Method get -Headers $AzureDevOpsAuthenicationHeader
 Foreach ($team in $TeamsResult.value)
 {
-    $uriTeamSettings = $UriOrganization + "$($projectId)/$($team.id)/_apis/work/teamsettings?api-version=6.1-preview.1"
+    $uriTeamSettings = "$($UriOrganization)$($projectId)/$($team.id)/_apis/work/teamsettings?api-version=6.1-preview.1"
     $TeamSettingsResult = Invoke-RestMethod -Uri $uriTeamSettings -Method get -Headers $AzureDevOpsAuthenicationHeader
     
     #Teams
@@ -39,7 +39,7 @@ Foreach ($team in $TeamsResult.value)
         if ($TeamSettingsResult.backlogVisibilities.$blv -eq $true)
         {
             $TeamsBackLogLevels = New-Object 'Collections.Generic.List[pscustomobject]'
-            $uriBackLogLevel = $UriOrganization + "$($project.id)/$($team.id)/_apis/work/backlogs/$($blv)?api-version=6.0-preview.1"
+            $uriBackLogLevel = "$($UriOrganization)$($project.id)/$($team.id)/_apis/work/backlogs/$($blv)?api-version=6.0-preview.1"
             $backLogLevelResult = Invoke-RestMethod -Uri $uriBackLogLevel -Method get -Headers $AzureDevOpsAuthenicationHeader
 
             $teamBackLogLevelsObject = [PSCustomObject] [ordered]@{
@@ -54,7 +54,7 @@ Foreach ($team in $TeamsResult.value)
             $table = $db.Tables["TeamsBoardColumns"]
             $bc = 1
 
-            $uriBoardsColumns =  $UriOrganization + "$($project.id)/$($team.id)/_apis/work/boards/$($backLogLevelResult.name)"
+            $uriBoardsColumns = "$($UriOrganization)$($project.id)/$($team.id)/_apis/work/boards/$($backLogLevelResult.name)"
             $BoardsColumnsResult = Invoke-RestMethod -Uri $uriBoardsColumns -Method get -Headers $AzureDevOpsAuthenicationHeader
             Foreach ($boardColumn in $BoardsColumnsResult.columns)
             {

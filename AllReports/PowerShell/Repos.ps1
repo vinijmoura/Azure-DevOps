@@ -9,8 +9,6 @@ Param
 )
 
 $UriOrganization = "https://dev.azure.com/$($Organization)/"
-echo $PAT | az devops login --org $UriOrganization
-az devops configure --defaults organization=$UriOrganization
 
 $minimumRev = "Minimum number of reviewers"
 $reqReviewers = "Required reviewers"
@@ -18,22 +16,23 @@ $workItemLink = "Work item linking"
 $commentReq = "Comment requirements"
 $Build = "Build"
 
-$uriRepositories = $UriOrganization + "$($projectId)/_apis/git/repositories?api-version=6.1-preview.1"
+$uriRepositories = "$($UriOrganization)$($projectId)/_apis/git/repositories?api-version=6.1-preview.1"
 $RepositoriesResult = Invoke-RestMethod -Uri $uriRepositories -Method get -Headers $AzureDevOpsAuthenicationHeader
 Foreach ($repo in $RepositoriesResult.value)
 {
     if ($repo.defaultBranch)
     {
         #repos and branch policies (default branch)
-        $ReposPolicyResult = az repos policy list --branch $repo.defaultBranch --org $UriOrganization --project $projectId --repository-id $repo.id | ConvertFrom-Json
-            
+        $uriBranchPolicies="$($UriOrganization)$($projectid)/_apis/git/policy/configurations?repositoryId=$($repo.id)&refName=$($repo.defaultBranch)&api-version=5.0-preview.1"
+        $ReposPolicyResult = Invoke-RestMethod -Uri $uriBranchPolicies -Method get -Headers $AzureDevOpsAuthenicationHeader
+               
         [bool] $repominimumRev = $false
         [bool] $reporeqReviewers = $false
         [bool] $repoworkItemLink = $false
         [bool] $repocommentReq = $false
         [bool] $repoBuild = $false
 
-        Foreach ($repoPolicy in $ReposPolicyResult)
+        Foreach ($repoPolicy in $ReposPolicyResult.value)
         {
             switch($repoPolicy.type.displayName)
             {
@@ -70,7 +69,7 @@ Foreach ($repo in $RepositoriesResult.value)
         if ($repo.size)
         {
             #repos and branch ahead/behind
-            $uriRepositoryStats = $UriOrganization + "$($projectId)/_apis/git/repositories/$($repo.id)/stats/branches?api-version=6.1-preview.1"
+            $uriRepositoryStats = "$($UriOrganization)$($projectId)/_apis/git/repositories/$($repo.id)/stats/branches?api-version=6.1-preview.1"
             $RepositoryStatsResult = Invoke-RestMethod -Uri $uriRepositoryStats -Method get -Headers $AzureDevOpsAuthenicationHeader
             Foreach ($repostats in $RepositoryStatsResult.value)
             {   
@@ -96,7 +95,7 @@ Foreach ($repo in $RepositoriesResult.value)
         $RepositoriesPullRequests = New-Object 'Collections.Generic.List[pscustomobject]'
         $table = $db.Tables["RepositoriesPullRequests"]
 
-        $uriRepositoryPullRequests = $UriOrganization + "$($projectId)/_apis/git/repositories/$($repo.id)/pullrequests?searchCriteria.includeLinks=true&searchCriteria.status=all&`$top=100&api-version=6.0"
+        $uriRepositoryPullRequests = "$($UriOrganization)$($projectId)/_apis/git/repositories/$($repo.id)/pullrequests?searchCriteria.includeLinks=true&searchCriteria.status=all&`$top=100&api-version=6.0"
         $RepositoryPullRequestsResult = Invoke-RestMethod -Uri $uriRepositoryPullRequests -Method get -Headers $AzureDevOpsAuthenicationHeader
         Foreach ($pullRequest in $RepositoryPullRequestsResult.value)
         {

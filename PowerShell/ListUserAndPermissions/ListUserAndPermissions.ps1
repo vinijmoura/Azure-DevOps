@@ -14,16 +14,21 @@ $allUsers = az devops user list --org $Organization | ConvertFrom-Json
 
 foreach($au in $allUsers.members)
 {
+    $au.user.principalName
+    $au.user.descriptor
     $activeUserGroups = az devops security group membership list --id $au.user.principalName --org $Organization --relationship memberof | ConvertFrom-Json
-    [array]$groups = ($activeUserGroups | Get-Member -MemberType NoteProperty).Name
-
-    foreach ($aug in $groups)
+    if ($activeUserGroups)
     {
-        $UserGroups += New-Object -TypeName PSObject -Property @{
-                                            principalName=$au.user.principalName
-                                            displayName=$au.user.displayName
-                                            GroupName=$activeUserGroups.$aug.principalName
-                                            }
+        [array]$groups = ($activeUserGroups | Get-Member -MemberType NoteProperty).Name
+
+        foreach ($aug in $groups)
+        {
+            $UserGroups += New-Object -TypeName PSObject -Property @{
+                                                principalName=$au.user.principalName
+                                                displayName=$au.user.displayName
+                                                GroupName=$activeUserGroups.$aug.principalName
+                                                }
+        }
     }
 }
 

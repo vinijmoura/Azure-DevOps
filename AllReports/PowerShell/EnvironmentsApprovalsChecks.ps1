@@ -13,7 +13,7 @@ $UriOrganization = "https://dev.azure.com/$($Organization)/"
 $EnvironmentsApprovalsChecks = New-Object 'Collections.Generic.List[pscustomobject]'
 $table = $db.Tables["EnvironmentsApprovalsChecks"]
 
-$uriEnvironments = $UriOrganization + "$($projectId)/_apis/distributedtask/environments?api-version=6.1-preview.1"
+$uriEnvironments = "$($UriOrganization)$($projectId)/_apis/distributedtask/environments?api-version=6.1-preview.1"
 $EnvironmentsResult = Invoke-RestMethod -Uri $uriEnvironments -Method get -Headers $AzureDevOpsAuthenicationHeader
 Foreach ($environment in $EnvironmentsResult.value)
 {
@@ -29,7 +29,7 @@ Foreach ($environment in $EnvironmentsResult.value)
                 name="$($environment.name)"
                 }
             ) | ConvertTo-Json
-    $uriEnvironmentChecks = $UriOrganization + "$($projectId)/_apis/pipelines/checks/queryconfigurations?`$expand=settings&api-version=6.1-preview.1"
+    $uriEnvironmentChecks = "$($UriOrganization)$($projectId)/_apis/pipelines/checks/queryconfigurations?`$expand=settings&api-version=6.1-preview.1"
     $EnvironmentChecksResult = Invoke-RestMethod -Uri $uriEnvironmentChecks -Method Post -Body $body -Headers $AzureDevOpsAuthenicationHeader -ContentType application/json
     Foreach ($envcheck in $EnvironmentChecksResult.value)
     {

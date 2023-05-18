@@ -11,20 +11,20 @@ $table = $db.Tables["FeedPackageVersions"]
 
 $UriRootFeeds = "https://feeds.dev.azure.com/$($Organization)/"
 
-$UriFeeds = $UriRootFeeds + "_apis/packaging/feeds?api-version=6.0-preview.1"
+$UriFeeds = "$($UriRootFeeds)_apis/packaging/feeds?api-version=6.0-preview.1"
 $FeedResult = Invoke-RestMethod -Uri $UriFeeds -Method get -Headers $AzureDevOpsAuthenicationHeader
 Foreach ($feed in $FeedResult.value)
 {
-    $UriFeedPackages = $UriRootFeeds + "$($feed.project.name)/_apis/packaging/Feeds/$($feed.id)/packages?api-version=6.0-preview.1"
+    $UriFeedPackages = "$($UriRootFeeds)$($feed.project.name)/_apis/packaging/Feeds/$($feed.id)/packages?api-version=6.0-preview.1"
     $FeedPackageResult = Invoke-RestMethod -Uri $UriFeedPackages -Method get -Headers $AzureDevOpsAuthenicationHeader
     Foreach ($feedpackage in $FeedPackageResult.value)
     {
-        $UriFeedPackageVersion = $UriRootFeeds + "$($feed.project.name)/_apis/packaging/Feeds/$($feed.id)/Packages/$($feedpackage.id)/versions?api-version=6.0-preview.1"
+        $UriFeedPackageVersion = "$($UriRootFeeds)$($feed.project.name)/_apis/packaging/Feeds/$($feed.id)/Packages/$($feedpackage.id)/versions?api-version=6.0-preview.1"
         $FeedPackageVersionResult = Invoke-RestMethod -Uri $UriFeedPackageVersion -Method get -Headers $AzureDevOpsAuthenicationHeader
         Foreach ($feedpackageversion in $FeedPackageVersionResult.value)
         {
             $BodyPackageVersionIds = @{ packageVersionIds = @($feedpackageversion.id) } | ConvertTo-Json
-            $UriFeedPackageVersionUsage = $UriRootFeeds + "$($feed.project.name)/_apis/packaging/Feeds/$($feed.id)/Packages/$($feedpackage.id)/versionmetricsbatch?api-version=6.0-preview.1"
+            $UriFeedPackageVersionUsage = "$($UriRootFeeds)$($feed.project.name)/_apis/packaging/Feeds/$($feed.id)/Packages/$($feedpackage.id)/versionmetricsbatch?api-version=6.0-preview.1"
             $FeedPackageVersionUsageResult = Invoke-RestMethod -Uri $UriFeedPackageVersionUsage -ContentType "application/json" -Method Post -Body $BodyPackageVersionIds -Headers $AzureDevOpsAuthenicationHeader
             $downloadCount = 0
             $downloadUniqueUsers = 0
@@ -39,7 +39,7 @@ Foreach ($feed in $FeedResult.value)
             }
             if ($feedpackageversion.sourceChain)
             {
-                $feedPackageSource = $feedpackageversion.sourceChain | Select -ExpandProperty name
+                $feedPackageSource = $feedpackageversion.sourceChain | Select-Object -ExpandProperty name
             }
 
             If (!$feed.description)

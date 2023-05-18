@@ -1,10 +1,11 @@
-﻿Param
+Param
 (
     [string]$PAT,
     [string]$Organization,
     [string]$Connstr
 )
 
+Clear-Host
 Get-Date
 Import-Module -Name SqlServer
 
@@ -34,7 +35,7 @@ $UriOrganization = "https://dev.azure.com/$($Organization)/"
 $table = $db.Tables["Processes"]
 
 #INSERT Processess
-$uriProcess = $UriOrganization + "_apis/work/processes?`$expand=projects"
+$uriProcess = "$($UriOrganization)_apis/work/processes?`$expand=projects"
 $ProcessResult = Invoke-RestMethod -Uri $uriProcess -Method get -Headers $AzureDevOpsAuthenicationHeader
 Foreach ($process in $ProcessResult.value)
 {
