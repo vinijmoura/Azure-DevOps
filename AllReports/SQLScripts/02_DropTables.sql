@@ -1,34 +1,51 @@
-DROP TABLE RepositoriesPullRequests
+IF OBJECT_ID('RepositoriesPullRequests', 'U') IS NOT NULL
+    DROP TABLE RepositoriesPullRequests;
 GO
-DROP TABLE RepositoriesAheadBehind
+IF OBJECT_ID('RepositoriesAheadBehind', 'U') IS NOT NULL
+    DROP TABLE RepositoriesAheadBehind;
 GO
-DROP TABLE Repositories
+IF OBJECT_ID('Repositories', 'U') IS NOT NULL
+    DROP TABLE Repositories;
 GO
-DROP TABLE TeamsBoardColumns
+IF OBJECT_ID('TeamsBoardColumns', 'U') IS NOT NULL
+    DROP TABLE TeamsBoardColumns;
 GO
-DROP TABLE TeamsBoardLanes
+IF OBJECT_ID('TeamsBoardLanes', 'U') IS NOT NULL
+    DROP TABLE TeamsBoardLanes;
 GO
-DROP TABLE TeamsBackLogLevels
+IF OBJECT_ID('TeamsBackLogLevels', 'U') IS NOT NULL
+    DROP TABLE TeamsBackLogLevels;
 GO
-DROP TABLE TeamsWorkingDays
+IF OBJECT_ID('TeamsWorkingDays', 'U') IS NOT NULL
+    DROP TABLE TeamsWorkingDays;
 GO
-DROP TABLE Teams
+IF OBJECT_ID('Teams', 'U') IS NOT NULL
+    DROP TABLE Teams;
 GO
-DROP TABLE EnvironmentsApprovalsChecks
+IF OBJECT_ID('EnvironmentsApprovalsChecks', 'U') IS NOT NULL
+    DROP TABLE EnvironmentsApprovalsChecks;
 GO
-DROP TABLE Projects
+IF OBJECT_ID('Projects', 'U') IS NOT NULL
+    DROP TABLE Projects;
 GO
-DROP TABLE ProcessesWorkItemsFields
+IF OBJECT_ID('ProcessesWorkItemsFields', 'U') IS NOT NULL
+    DROP TABLE ProcessesWorkItemsFields;
 GO
-DROP TABLE Processes
+IF OBJECT_ID('Processes', 'U') IS NOT NULL
+    DROP TABLE Processes;
 GO
-DROP TABLE UsersPersonalAccessTokens
+IF OBJECT_ID('UsersPersonalAccessTokens', 'U') IS NOT NULL
+    DROP TABLE UsersPersonalAccessTokens;
 GO
-DROP TABLE UsersGroups
+IF OBJECT_ID('UsersGroups', 'U') IS NOT NULL
+    DROP TABLE UsersGroups;
 GO
-DROP TABLE Users
+IF OBJECT_ID('Users', 'U') IS NOT NULL
+    DROP TABLE Users;
 GO
-DROP TABLE InstalledExtensions
+IF OBJECT_ID('InstalledExtensions', 'U') IS NOT NULL
+    DROP TABLE InstalledExtensions;
 GO
-DROP TABLE FeedPackageVersions
+IF OBJECT_ID('FeedPackageVersions', 'U') IS NOT NULL
+    DROP TABLE FeedPackageVersions;
 GO
