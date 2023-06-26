@@ -15,10 +15,7 @@ $LogFile = $PSScriptRoot + "\" + $LogDate + ".log"
 #Create LogFile Header
 & .\LogFile.ps1 -LogFile $LogFile -Message "Starting Azure DevOps data extraction..."
 
-$sqlcc = New-Object -TypeName System.Data.SqlClient.SqlConnection -ArgumentList $Connstr
-$sc = New-Object -TypeName Microsoft.SqlServer.Management.Common.ServerConnection -ArgumentList $sqlcc
-$srv = New-Object -TypeName Microsoft.SqlServer.Management.Smo.Server -ArgumentList $sc
-$db = $srv.Databases["azuredevopsreports"]
+$db = Get-SqlDatabase -Name "azuredevopsreports" -ConnectionString $Connstr
 
 $AzureDevOpsAuthenicationHeader = @{Authorization = 'Basic ' + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(":$($PAT)")) } + @{"Content-Type"="application/json"; "Accept"="application/json"}
 $UriOrganization = "https://dev.azure.com/$($Organization)/"
