@@ -77,7 +77,7 @@ Foreach ($project in $ProjectsResult.value)
                         {
                             $i=0
                             $WorkDate = $startDate
-                            while ($WorkDate -le $finishDate)
+                            while ($WorkDate -lt $finishDate)
                             {
                                 $WorkDate = $startDate.AddDays($i)
 
