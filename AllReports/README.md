@@ -6,6 +6,8 @@ Data extraction and Power BI report that generate management informations about 
 ## Azure DevOps Management Reports
 This project aims to extract management information (Processes, Projects, Repos, Build and Release Defintions, etc.) from Azure DevOps and present it in a single report.
 
+To understand my project, see this video on Azure DevOps Youtube Channel - [Create Azure DevOps Management Reports](https://aka.ms/AzureDevOpsManagementReports)
+
 ## Get started - Configure Azure DevOps Management Reports
 
 ### Create Azure SQL Database
