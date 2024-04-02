@@ -24,6 +24,7 @@ Data extraction and Power BI report that generate management informations about 
 *  [How to: Create Pull Requests Dashboard on Azure DevOps](https://vinijmoura.medium.com/how-to-create-pull-requests-dashboard-on-azure-devops-ff3befad1000)
 *  [How to: Create Dashboard to visualize Branches ahead/behind](https://vinijmoura.medium.com/how-to-create-dashboard-to-visualize-branches-ahead-behind-6154cad4308d)
 *  [How to: Azure Repos Health Check on Azure DevOps](https://vinijmoura.medium.com/how-to-azure-repos-health-check-on-azure-devops-5b0322c7295c)
+*  [How to: API to delete branches on Azure DevOps](https://vinijmoura.medium.com/how-to-api-to-delete-branches-on-azure-devops-52b0463a015f)
    
 
 ## Azure Pipelines
