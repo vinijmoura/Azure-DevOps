@@ -32,7 +32,9 @@ After creating the database, please access SQL Server Management Studio, connect
 ### Run PowerShell Scripts
 Install Module SqlServer
 
-To run scripts, it's necessary to install the [ SQL Server PowerShell module](https://docs.microsoft.com/en-us/sql/powershell/download-sql-server-ps-module?view=sql-server-ver16)
+To run scripts, it's necessary:
+ - Install PowerShell 7 or above [PowerShell Releases](https://github.com/PowerShell/PowerShell/releases)
+ - Install the [ SQL Server PowerShell module](https://docs.microsoft.com/en-us/sql/powershell/download-sql-server-ps-module?view=sql-server-ver16)
 
   ```powershell
   Install-Module -Name SqlServer -Force
