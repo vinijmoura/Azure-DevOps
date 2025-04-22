@@ -13,11 +13,11 @@
 
 Discover the Next Steps and the Future of Our Project! 🔍
 
-* 📢 Stay up to date with the latest developments and be part of the journey! In this post, we share the next steps and our vision for the future.
+* 📢 Stay up to date with the latest developments and be part of the journey!
 
 * 💡 Your support and feedback are essential in shaping what comes next.
 
-* 👉 Read now and join us in making this project even better! [How to: Azure DevOps Management Reports and the next steps](https://vinijmoura.medium.com/how-to-azure-devops-management-reports-and-the-next-steps-16e0a85e6042)
+* 👉 In this post, we share the next steps and our vision for the future! Read now and join us in making this project even better! [How to: Azure DevOps Management Reports and the next steps](https://vinijmoura.medium.com/how-to-azure-devops-management-reports-and-the-next-steps-16e0a85e6042)
 
 ## Azure Boards 
 ![boards](./images/Boards.png) 
