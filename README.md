@@ -102,7 +102,8 @@ Discover the Next Steps and the Future of Our Project! 🔍
 * [How to: Understanding Code Search Rest API on Azure DevOps](https://vinijmoura.medium.com/how-to-understanding-code-search-rest-api-on-azure-devops-34f29d725c73)
 
 # Contributors
-Special thanks to the following contributor(s) for this product:
+Contributor(s) for this product:
+* [Vinicius Moura](https://github.com/vinijmoura)
 * [Ewerton Jordão](https://github.com/EwertonJordao)
 * [Miguel Nogueira](https://github.com/Miigg)
 * [Rafael Mendonça Pereira dos Santos](https://github.com/rafaelmpsantos)
