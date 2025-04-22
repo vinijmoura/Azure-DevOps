@@ -1,15 +1,23 @@
 # Azure DevOps 
 ![azuredevops](./images/AzureDevOps.png) 
 
-Data extraction and Power BI report that generate management informations about your Azure DevOps organization. Using Azure DevOps CLI and Azure DevOps REST API, PowerShell scripts extract data from Azure DevOps, store this information in an Azure SQL Database and shows them in a Power BI report.
+* 📊 Data extraction and Power BI report that generate management informations about your Azure DevOps organization.
 
-🚀 Discover the Next Steps and the Future of Our Project! 🔍
+* 🛠️ Use Azure DevOps CLI and Azure DevOps REST API, PowerShell scripts extract data from Azure DevOps.
 
-📢 Stay up to date with the latest developments and be part of the journey! In this post, we share the next steps and our vision for the future.
+* 🛢️ Store this information in an Azure SQL Database.
 
-💡 Your support and feedback are essential in shaping what comes next.
+* 📈 Shows them in a Power BI report.
 
-👉 Read now and join us in making this project even better! [How to: Azure DevOps Management Reports and the next steps](https://vinijmoura.medium.com/how-to-azure-devops-management-reports-and-the-next-steps-16e0a85e6042)
+## The Future
+
+Discover the Next Steps and the Future of Our Project! 🔍
+
+* 📢 Stay up to date with the latest developments and be part of the journey! In this post, we share the next steps and our vision for the future.
+
+* 💡 Your support and feedback are essential in shaping what comes next.
+
+* 👉 Read now and join us in making this project even better! [How to: Azure DevOps Management Reports and the next steps](https://vinijmoura.medium.com/how-to-azure-devops-management-reports-and-the-next-steps-16e0a85e6042)
 
 ## Azure Boards 
 ![boards](./images/Boards.png) 
