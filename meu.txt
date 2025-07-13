@@ -1,0 +1,100 @@
+143147 - AEQD - Monitoriza��o de acessos SASASK - Cria��o de pr|3ddf1faa-2e04-4d00-a2b6-9b05308d1fde
+149927 - Simplificar o processo de atribui��o de cart�es de cr�|c44a6e56-bba2-4747-ade6-e446f360bd43
+153701 - Aumento massivo de limites de cart�es de cr�dito 15370|f9989695-7a3c-4e4a-9131-3dd48b0d379a
+111984 - Revenue Improvement  Cash-Advance Parcelamentos|1481bedc-9319-46f3-9c00-82955ec91194
+161065 - Reabertura da Campanha EO25 - Campanha de pre�o pr�-ap|d275abd6-59e9-49b0-aae8-37aa442b50a8
+157459 - Inclus�o na tabela da DCESSP do campo marcador em WCE|19265a04-5969-49be-be37-3f09104383d4
+161347 - Novos DUC ADENE 568 - Banco Montepio 161347|49bdc603-7a69-439b-9352-4f013256468c
+139073 - Extra��o de informa��o para Auditoria relativamente �|3140152d-e1dd-402c-8124-99ca01ef781c
+157564 - Aplica��o DEVO - Opera��es Pacs008 recebidas via Targe|be8195a2-a26c-4bf1-ac16-1ff88e4570c7
+159908 - MP - Atualiza��o de consentimentos de clientes com dat|8cbf0cf8-c43b-42a1-b677-381828dfeb63
+153309 - Data Quality - Reporte Regulamentar - self assessment|e68c4da9-12b4-4486-bed6-4e273bda5c6c
+158546 - Suporte AEQD 158546|7d18616c-8e5d-4812-817d-c5c4338c5f1f
+151344 - Parametriza��o A��o Member Get Member 151344|478fb534-bddd-4346-99ef-4830946a4fe0
+157896 - Envio do Extrato de Comiss�es de 2024 157896|44fff8f1-ef93-4ba1-9da0-392de5966064
+153303 - Data Quality - Reporte Regulamentar - Levantamento e I|efeca618-2d69-43e4-8c22-b84ed3502c97
+153245 - Data Quality - Reporte Regulamentar - Levantamento e I|e46ce19b-c7c8-49ce-973d-4e94049803b6
+159692 - MP - GGE Inclus�o de Clientes ACEFIIF 159692|c9b78330-d61a-4593-94ff-a9a767a32555
+160283 - MP - Empr�stimos Obrigacionistas Transa��o EN49 160283|a8ed1e05-576c-419c-ac19-e8b5041e00ef
+153331 - Governo de Dados - Reporte Regulamentar - Defini��o do|9e788e2b-9ecb-4b18-8718-c86bb3c41e2d
+139576 - Novas Condi��es de Cr�dito Habita��o e Multifun��es|5b492de6-69aa-49e0-9f36-1fca9f221708
+162265 - Encerramento do Balc�o 272 Alfena - 31 de dezembro 202|2eb1b903-a6a9-41d4-968d-73f0ead314e9
+164790 - Novo DUC PGR 595 - Banco Montepio 164790|d80a507d-bc9a-4551-9719-8b82e6db3adc
+148699 - Integra��o DTQ-Departamento de Gest�o de Reclama��es n|056a6731-5627-4bdf-8060-6451c5ae51b4
+140224 - Implementa��o de SFTP com EAD|1893583f-9ba9-4249-9520-b71ab98ebd79
+165164 - Novos Valores DUCs e TSUs 2025|81d5aab8-2418-4bd5-8995-b9717c80c13d
+165244 - Programa RUMO_DCRH - inviabilizar a op��o de candidatu|8a3b46b1-b847-4cd8-b355-ff3b58a8d152
+165252 - Isen��o da comiss�o de reembolso antecipado 165252|a1b96998-f4b5-4c2c-b4fd-92b0792cac8d
+154904 - Integra��o de scores ESG nos sistemas do Banco Montepi|083e75cb-aa85-4cd1-bc13-2cbb683ace95
+143252 - Atualiza��o da carta a ser enviada ao FIADOR  corre��o|642c1525-edb9-4b1a-8480-ed43c59732af
+150653 - Reporte - Mapa Depositos e equiparados - Automatiza��o|3b9b4f21-95fc-45ca-b9f8-8ff329c24a6a
+165275 - OE 2025 Reten��o na fonte atividades profissionais 165|c00ab9c6-d824-4a45-8c80-3bc6ae4c0cd9
+150643 - Solu��o im�veis AM|ee2e1db3-4bd3-442c-a1b8-d2ea2ed74120
+153353 - MP - Melhorias simulador FlowCredit 153353|3eeefdfc-3a72-453f-aafb-344679363bb0
+141587 - MP - Automatiza��o de processamento de taxas de cr�dit|d069246a-a89e-4a4a-bca4-f6e1ee5418e3
+159317 - Gloss�rio e Dicion�rio de Dados CRC 159317|e510cbb8-53af-4e29-9693-f0811956434b
+159907 - Desativa��o dos motivos de inicio de PARI 159907|06dd8d36-62d6-48a6-b4b0-81d695245c63
+153239 - Governo de Dados - Reporte Regulamentar - Levantamento|77376d1f-a762-4219-bcd8-393d2ecbb55e
+149774 -  Implementa��o de regras para a oferta da j�ia na admi|9ab3d67d-e9e3-49c7-be9a-669236f11c56
+157709 - Banco Montepio iD BMiD 157709|512aa3a8-6e97-43c0-93c2-ea5faf028b0c
+147647 - Automatiza��o dos reportes das linhas FEI UNCAPPED e B|d31ed45f-5f3d-4742-a640-f2ef1673c2da
+153247 - Governo de Dados - Reporte Regulamentar - Levantamento|917c3fff-dc67-4636-bcd8-63b19e7d81b9
+161210 - Extra��o Mensal de Movimento Di�rio de Balc�o MDB desd|8ee75875-1f2a-468f-8eda-3cde5aa9277a
+150464 - Aumento limite diario - Levantamentos CH24 150464|d2f06e6e-a900-40ca-9c17-5d561a4b9c60
+144175 - Implementar procedimentos de controlo de Cart�es Pr� P|f0e4032a-e18f-4167-9aae-3eb4c4801fa9
+153319 - Campanhas Im�veis BM e Financiados BM Corre��o WCP 153|503f7c70-a0c5-40ba-ad11-59782c7b0135
+149894 - Altera��o no tratamento das Isen��es subjectivas de Im|63c1c810-e5fb-4de0-b35a-b8b25e919e4d
+104824 - MP - Migra��o do KingswaySoft no ambientes|ef3fadae-8f4e-4701-af19-6297639041b7
+162638 - MP - Agenda Comit� de Cr�dito Arredondamento de valore|76d37470-8110-48d9-812a-b5f2a8da1972
+148957 - Projecto Simplifica��o do c�lculo de imparidade - Port|9dca061e-6310-4d67-afa1-149dfdf553cd
+165097 - Altera��o de taxa de reten��o de IRS da Madeira e alte|a4db04d3-d7f8-4d35-917b-bacd1bcc2d95
+165004 - AM - Declara��es IRSIRC 2024 a emitir em Janeiro 2025|b853b980-c20c-45f8-9c61-c7d75c475a84
+161575 - CIAFirco - Redu��o Falsos Positivos - Wave IV 161575|a402c003-32c1-4059-8344-1ce63a5c401f
+159791 - MARE - Altera��o da fonte de dados da Lista Devedores|2348902d-c183-4491-b6ac-766979a5c778
+151692 - Adicionar 1 coluna ao ficheiro exportado para Cornerst|b2ebb19c-ae44-4590-bb91-97b352e459ab
+160393 - BdP_CEX20240000135090__CONTAS E SERVI�OS DE PAGAMENTO|c49f07d2-1b1c-4141-baf8-76136fe6a4ce
+135592 - Implementa��o Push OTP|0251c4b6-c547-4ccd-868e-3e4580b03594
+167167 - ePMO - Atividade de 2025 167167|1ac2ea98-7481-44ba-93fc-20ecdef65924
+143150 - SIRA - aumento da dimens�o dos ficheiros a inserir no|80237a19-bd51-4981-a60a-bde6104f70bd
+152004 - CARE EMP - PBI Pipeline - Propostas NovasAprovadasCont|833709aa-5c0e-4e6a-a9a8-66d4f2ee91c2
+154921 - Criar notas de liquida��o na conta agregadora da MGA 1|795a8767-b2a0-40ba-9251-93106cb108cc
+167029 - Altera��o taxa de reten��o na fonte n� 5 art 87� CIRC|9218394f-b8d6-4751-bcb3-c71d4e007ece
+161585 - Contas Condominio � Documento Informativo 161585|426d330e-e23a-4ba6-8745-e63843517095
+163449 - Adequar mensagens - Digital Authentication Framework|bf1628b7-3080-46d2-99da-cf3a7ff904e8
+136362 - Migra��o do Portal DSO para a platarforma ASK|dadfe006-90ff-4ed8-b5e9-30f869750480
+162169 - Altera��o Melhoria CRM M16  ITR 52677 Sprint 2  Alarm�|5dbe898c-1d4d-443f-82db-467948a93102
+157603 - Migra��o Tecnol�gica II aplica��es Avaliadores Im�veis|031c6998-5e25-41b8-af72-ffd279f579b0
+167452 - Enviar Carta de Altera��o Tabela de Comiss�es 167452|934e49ab-3b1c-460b-af60-06638e459ce4
+143831 - Cria��o de uma transa��o para cobran�a de rendas sobre|1b045a2a-dba9-4115-997b-95ea6fddcd2b
+152670 - Upgrade de vers�o do AccipiensLF Acp8R17 MOP-965 15267|cba8b030-2939-4dad-a512-dab7575d3cbf
+159321 - Linhagem_CRC 159321|2b4df10b-3662-4c3c-b6e9-bbd99bbc7b3f
+164130 - NETFUTURO BACKOFFICE - Repos e pipelines WEB e WS 1641|b109fb86-6c92-4902-a89d-b09f524f51c3
+166705 - Solu��o GenAI - Integra��o IA na valida��o de Atas de|3f6c77cf-330c-48f4-a4ff-511929e74a53
+167104 - Detemina��o Espec�fica CEX_2023_0000138363 e do ITR 11|559ec029-3dc0-4024-8e3f-edf9c60b8b58
+136623 - Atribui��o de Facilidade de Descoberto Ordenado_Conta|d2e76058-fd3c-4b49-96ac-40f676114cb2
+148229 - DAI-2024-018003 - Documentar Aplica��o SGGE 148229|fe553a8f-45b9-40f2-87ed-4d2732ae093a
+167748 - Novos Dep�sitos a Prazo por escal�es 167748|ec108aeb-8ca5-499d-a86e-c8f1f92496ed
+163593 - Implementa��o de novo ficheiro SIAC - TEB 163593|5e508fe9-bbea-46ed-bf7b-f9ee2525b58b
+157655 - MP - Manuten��o atribui��o de acessos ContabNet 157655|cdad02f0-518e-40bf-9490-31c5278ca151
+166519 - Emiss�o da declara��o Modelo 10 Ano de 2024 166519|b66d9639-1661-440d-b8bc-6eb5dae935b9
+167353 - Emiss�o da declara��o Modelo 37 - Ano de 2024 167353|f47fb627-ef92-449e-81d1-6ed7294d41a3
+167367 - Emiss�o Modelo 39 - Ano 2024 167367|51b2f3ee-828c-4597-ad70-283366b17b2c
+166883 - AUDITORIA ANUAL OBRIGA��ES COBERTAS 2024--EXTRA��O DOC|fdc3cdc0-454d-400a-8022-def0451851a8
+169688 - Portal Smart Governance Onboard - atividade de 2025 16|1baa795c-8f24-457e-a92f-3059baf1c1b0
+168439 - DSCI - Power Apps - Actividade 2025 168439|f9587e03-d385-48f2-95a4-91b80bbe1f49
+145407 - Revis�o Regulamento Risco de Cr�dito Set24|48adda2e-04e8-4a1c-9dc8-60d3446d4370
+160763 - MP - Leasing Upgrade Lease 718 PF-PRO-24029 160763|475954a7-55dd-4828-8318-7d4c9b42a262
+167246 - MP - Factoring e Confirming - Inibi��o de emiss�o de d|8e49e3db-7481-461d-a9ae-90810dcb2f6d
+167244 - MP - Factoring - Cria��o manual de propostas sem conta|67dc7014-2042-4b39-8d26-0524b0574b78
+171169 - Altera��o da comiss�o de transfer�ncias Imediatas em L|55f9faa8-e881-48ad-9e3e-805338324e0a
+146435 - Encarteiramento DAC|d4a65f54-ad30-4bda-bc80-5639ca7c761b
+163458 - Disponibiliza��o  de ficheiro com as  subscri��es de f|574a169e-249b-4452-9ec0-f62885cfde4c
+153243 - Governo de Dados - Reporte Regulamentar - Levantamento|7f265b93-21d9-4acc-a7d1-c5add1e76d5a
+153246 - Governo de Dados - Reporte Regulamentar - Levantamento|fb3f28a6-32e6-40e0-9299-5d27d10c5c45
+153297 - Governo de Dados - Reporte Regulamentar - Levantamento|ddc435c6-49e4-4c0b-b291-c4dc51157ad4
+153302 - Governo de Dados - Reporte Regulamentar - Levantamento|7c804530-f6de-4f21-b203-2020526d1f81
+138169 - Cria��o nova transa��o - PEPAML Elevado - Question�rio|c1a4a1d2-aaff-4edf-b1de-c86747df6910
+169537 - Envio do Formul�rio de Informa��o do Depositante_FID 2|21d91bc6-0a6e-4a23-bdf9-81ee947ec0a0
+173220 - MP - Otimiza��o Core 2025 173220|9ec8a307-2218-4457-a38d-b3b6b2288e7f
+168370 - Orquestrador - Evolu��o 168370|0fa4a347-bdef-4c7a-87b4-ded8af3dadc8
+166093 - Declara��es Fiscais 2024 166093|b5cef142-fa29-41d0-b90e-0332c2a26ea6
