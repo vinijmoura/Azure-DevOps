@@ -19,6 +19,26 @@ Discover the Next Steps and the Future of Our Project! 🔍
 
 * 👉 In this post, we share the next steps and our vision for the future! Read now and join us in making this project even better! [How to: Azure DevOps Management Reports and the next steps](https://vinijmoura.medium.com/how-to-azure-devops-management-reports-and-the-next-steps-16e0a85e6042)
 
+## 🏆 Awards — GitHub Stars Nomination
+
+This project represents a long-term and consistent contribution to the developer community, with a strong focus on **Azure DevOps governance, observability, and automation**.
+
+Through dozens of practical guides, scripts, and dashboards, it helps organizations and engineers:
+
+- Gain **deep visibility** into Azure DevOps (Boards, Repos, Pipelines, Test Plans, Artifacts, Permissions, and more)
+- Make **data-driven decisions** using Azure DevOps REST APIs, CLI, PowerShell, Azure SQL, and Power BI
+- Improve **security, compliance, and operational efficiency** at scale
+- Learn through **clear, real-world examples** shared openly with the community
+
+Beyond the code itself, this work is amplified by extensive **technical writing and knowledge sharing**, with detailed step-by-step articles published on Medium and referenced by practitioners worldwide.
+
+The project is actively maintained, continuously evolving, and built with the goal of **empowering teams and individuals** to better understand and manage complex Azure DevOps environments.
+
+🔗 **GitHub Stars Nomination**  
+If you believe this work has made a positive impact on the developer community, you can submit a nomination here (my github is @vinijmoura):  
+👉 https://stars.github.com/nominate/
+
+
 ## Azure Boards 
 ![boards](./images/Boards.png) 
 * [How to: Create all iterations to your project on Azure DevOps](https://vinijmoura.medium.com/how-to-create-all-iterations-to-your-project-on-azure-devops-cedadb045705)
