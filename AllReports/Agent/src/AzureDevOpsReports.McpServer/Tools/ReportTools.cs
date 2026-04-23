@@ -94,6 +94,76 @@ public sealed class ReportTools(
     }
 
     [McpServerTool, Description(
+        "Audit-oriented list of user-to-group memberships. Joins Users with UsersGroups. " +
+        "Supports filtering by user (display name or principal name substring) and/or group " +
+        "name substring. Answers questions like 'who is in group X?' or 'what groups does user Y " +
+        "belong to?'. Results ordered by GroupName, then UserDisplayName.")]
+    public Task<string> ListUserGroupMemberships(
+        [Description("Optional substring to filter UserDisplayName or UserPrincipalName.")] string? userContains,
+        [Description("Optional substring to filter GroupName (e.g. 'Admin', 'Contributors').")] string? groupContains,
+        [Description("Maximum rows. Default 500.")] int? maxRows,
+        CancellationToken ct)
+    {
+        const string sql = """
+            SELECT u.UserDisplayName,
+                   u.UserPrincipalName,
+                   u.UserLicenseDisplayName,
+                   ug.GroupName
+            FROM UsersGroups ug
+            INNER JOIN Users u ON u.UserId = ug.UserId
+            WHERE (@user IS NULL
+                    OR u.UserDisplayName   LIKE '%' + @user + '%'
+                    OR u.UserPrincipalName LIKE '%' + @user + '%')
+              AND (@grp  IS NULL OR ug.GroupName LIKE '%' + @grp + '%')
+            ORDER BY ug.GroupName, u.UserDisplayName;
+            """;
+
+        return executor.ExecuteJsonAsync(
+            sql,
+            parameters: new Dictionary<string, object?>
+            {
+                ["user"] = userContains,
+                ["grp"]  = groupContains
+            },
+            maxRows: maxRows ?? 500,
+            ct: ct);
+    }
+
+    [McpServerTool, Description(
+        "Aggregated group membership summary: one row per group with member count and up to 5 " +
+        "sample member display names (comma-separated). Ordered by MemberCount DESC. " +
+        "Great for high-level permissioning audits ('which groups have the most users?').")]
+    public Task<string> GroupMembershipSummary(
+        [Description("Optional substring filter on GroupName.")] string? groupContains,
+        [Description("Maximum rows. Default 200.")] int? maxRows,
+        CancellationToken ct)
+    {
+        const string sql = """
+            WITH Ranked AS (
+                SELECT ug.GroupName,
+                       u.UserDisplayName,
+                       ROW_NUMBER() OVER (PARTITION BY ug.GroupName ORDER BY u.UserDisplayName) AS rn
+                FROM UsersGroups ug
+                INNER JOIN Users u ON u.UserId = ug.UserId
+                WHERE (@grp IS NULL OR ug.GroupName LIKE '%' + @grp + '%')
+            )
+            SELECT GroupName,
+                   COUNT(*) AS MemberCount,
+                   STRING_AGG(CASE WHEN rn <= 5 THEN UserDisplayName END, ', ')
+                       WITHIN GROUP (ORDER BY UserDisplayName) AS SampleMembers
+            FROM Ranked
+            GROUP BY GroupName
+            ORDER BY MemberCount DESC, GroupName;
+            """;
+
+        return executor.ExecuteJsonAsync(
+            sql,
+            parameters: new Dictionary<string, object?> { ["grp"] = groupContains },
+            maxRows: maxRows ?? 200,
+            ct: ct);
+    }
+
+    [McpServerTool, Description(
         "Lists pull requests with filters for project, repository, status and creator. " +
         "Sorted by PullRequestCreatedDate descending.")]
     public Task<string> ListPullRequests(
