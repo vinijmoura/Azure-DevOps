@@ -18,11 +18,14 @@ over the `azuredevopsreports` database.
 
 ## Features
 
-- 10 built-in MCP tools, including:
+- Built-in MCP tools:
   - `GetSchemaReference` — embedded documentation of all tables and relationships.
   - `ListTables`, `DescribeTable` — live introspection of the connected database.
   - `ListProjects`, `ListUsers`, `ListPullRequests`, `ListRepositories`,
     `ListInstalledExtensions`, `ListPersonalAccessTokens`.
+  - `ListFeedPackageVersions`, `TopFeedPackagesByDownloads` — Azure Artifacts
+    feed insights (filter by feed/package/type/source, rank by download
+    aggregates).
   - `TopProjectsByActivity` — pre-built aggregation over the `Projects` metrics columns.
   - `ExecuteReadOnlySql` — run an arbitrary `SELECT` / `WITH` query (DDL/DML rejected).
 - Strict read-only validator: rejects `INSERT`, `UPDATE`, `DELETE`, `MERGE`,

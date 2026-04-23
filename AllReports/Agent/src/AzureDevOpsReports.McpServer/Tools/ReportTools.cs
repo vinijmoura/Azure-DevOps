@@ -200,6 +200,94 @@ public sealed class ReportTools(
     }
 
     [McpServerTool, Description(
+        "Lists rows from the FeedPackageVersions table (Azure Artifacts feeds). " +
+        "Supports filters for feed name, package name, package type (nuget/npm/maven/pypi/…), " +
+        "source (local/upstream) and an optional flag to return only the latest version of each " +
+        "package. Sortable by Downloads (default), UniqueUsers, Date or Version.")]
+    public Task<string> ListFeedPackageVersions(
+        [Description("Optional FeedName substring filter.")] string? feedNameContains,
+        [Description("Optional FeedPackageName substring filter.")] string? packageNameContains,
+        [Description("Optional exact match for FeedPackageType (e.g. nuget, npm, maven, pypi).")] string? packageType,
+        [Description("Optional exact match for FeedPackageSource (e.g. local, upstream).")] string? packageSource,
+        [Description("If true, returns only rows where FeedPackageVersionLatest = 1.")] bool? latestOnly,
+        [Description("Sort key: Downloads (default) | UniqueUsers | Date | Version.")] string? orderBy,
+        [Description("Maximum rows. Default 100.")] int? maxRows,
+        CancellationToken ct)
+    {
+        var order = (orderBy ?? "Downloads").Trim().ToLowerInvariant() switch
+        {
+            "downloads"   => "FeedPackageVersionDownloadCount DESC",
+            "uniqueusers" => "FeedPackageVersionDownloadUniqueUsers DESC",
+            "date"        => "FeedPackageVersionDate DESC",
+            "version"     => "FeedName, FeedPackageName, FeedPackageVersionDate DESC",
+            _ => throw new ArgumentException(
+                    $"Unknown orderBy '{orderBy}'. Allowed: Downloads, UniqueUsers, Date, Version.",
+                    nameof(orderBy))
+        };
+
+        var sql = $"""
+            SELECT FeedId, FeedName, FeedPackageName, FeedPackageType, FeedPackageSource,
+                   FeedPackageVersion, FeedPackageVersionLatest, FeedPackageVersionDate,
+                   FeedPackageVersionDownloadCount, FeedPackageVersionDownloadUniqueUsers
+            FROM FeedPackageVersions
+            WHERE (@feed   IS NULL OR FeedName        LIKE '%' + @feed + '%')
+              AND (@pkg    IS NULL OR FeedPackageName LIKE '%' + @pkg  + '%')
+              AND (@type   IS NULL OR FeedPackageType   = @type)
+              AND (@source IS NULL OR FeedPackageSource = @source)
+              AND (@latest = 0     OR FeedPackageVersionLatest = 1)
+            ORDER BY {order};
+            """;
+
+        return executor.ExecuteJsonAsync(
+            sql,
+            parameters: new Dictionary<string, object?>
+            {
+                ["feed"]   = feedNameContains,
+                ["pkg"]    = packageNameContains,
+                ["type"]   = packageType,
+                ["source"] = packageSource,
+                ["latest"] = (latestOnly ?? false) ? 1 : 0
+            },
+            maxRows: maxRows ?? 100,
+            ct: ct);
+    }
+
+    [McpServerTool, Description(
+        "Top N most downloaded packages across all feeds (aggregated across versions). " +
+        "Useful to identify the most-consumed artifacts.")]
+    public Task<string> TopFeedPackagesByDownloads(
+        [Description("Optional FeedPackageType filter (e.g. nuget, npm).")] string? packageType,
+        [Description("Number of rows to return. Default 10.")] int? top,
+        CancellationToken ct)
+    {
+        var rows = Math.Clamp(top ?? 10, 1, 500);
+
+        const string sql = """
+            SELECT TOP (@top)
+                   FeedName,
+                   FeedPackageName,
+                   FeedPackageType,
+                   SUM(FeedPackageVersionDownloadCount)       AS TotalDownloads,
+                   SUM(FeedPackageVersionDownloadUniqueUsers) AS TotalUniqueUsers,
+                   COUNT(*)                                   AS VersionCount
+            FROM FeedPackageVersions
+            WHERE (@type IS NULL OR FeedPackageType = @type)
+            GROUP BY FeedName, FeedPackageName, FeedPackageType
+            ORDER BY TotalDownloads DESC;
+            """;
+
+        return executor.ExecuteJsonAsync(
+            sql,
+            parameters: new Dictionary<string, object?>
+            {
+                ["top"] = rows,
+                ["type"] = packageType
+            },
+            maxRows: rows,
+            ct: ct);
+    }
+
+    [McpServerTool, Description(
         "Lists installed Azure DevOps extensions (id, publisher, version, last published date).")]
     public Task<string> ListInstalledExtensions(
         [Description("Maximum rows. Default 200.")] int? maxRows,
