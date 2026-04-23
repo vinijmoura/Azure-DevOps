@@ -394,6 +394,319 @@ public sealed class ReportTools(
     }
 
     [McpServerTool, Description(
+        "Per-team configuration overview: one row per team with project, TeamWorkingWithBugs flag " +
+        "and aggregate counts of working days, backlog levels, board columns and board lanes. " +
+        "Useful to spot teams with missing/empty configuration (any count = 0).")]
+    public Task<string> ListTeams(
+        [Description("Optional project name substring filter.")] string? projectName,
+        [Description("Optional team name substring filter.")] string? teamName,
+        [Description("Maximum rows. Default 500.")] int? maxRows,
+        CancellationToken ct)
+    {
+        const string sql = """
+            SELECT p.TeamProjectName,
+                   t.TeamId,
+                   t.TeamName,
+                   t.TeamWorkingWithBugs,
+                   (SELECT COUNT(*) FROM TeamsWorkingDays   w WHERE w.TeamId = t.TeamId) AS WorkingDaysCount,
+                   (SELECT COUNT(*) FROM TeamsBackLogLevels b WHERE b.TeamId = t.TeamId) AS BacklogLevelsCount,
+                   (SELECT COUNT(*) FROM TeamsBoardColumns  c WHERE c.TeamId = t.TeamId) AS BoardColumnsCount,
+                   (SELECT COUNT(*) FROM TeamsBoardLanes    l WHERE l.TeamId = t.TeamId) AS BoardLanesCount
+            FROM Teams t
+            INNER JOIN Projects p ON p.TeamProjectId = t.TeamProjectId
+            WHERE (@proj IS NULL OR p.TeamProjectName LIKE '%' + @proj + '%')
+              AND (@team IS NULL OR t.TeamName        LIKE '%' + @team + '%')
+            ORDER BY p.TeamProjectName, t.TeamName;
+            """;
+
+        return executor.ExecuteJsonAsync(
+            sql,
+            parameters: new Dictionary<string, object?>
+            {
+                ["proj"] = projectName,
+                ["team"] = teamName
+            },
+            maxRows: maxRows ?? 500,
+            ct: ct);
+    }
+
+    [McpServerTool, Description(
+        "Raw list of configured working days per team (TeamsWorkingDays joined with Teams and " +
+        "Projects). Supports project/team filters. Useful to compare calendar assumptions across " +
+        "squads.")]
+    public Task<string> ListTeamWorkingDays(
+        [Description("Optional project name substring filter.")] string? projectName,
+        [Description("Optional team name substring filter.")] string? teamName,
+        [Description("Maximum rows. Default 1000.")] int? maxRows,
+        CancellationToken ct)
+    {
+        const string sql = """
+            SELECT p.TeamProjectName, t.TeamName, wd.TeamWorkingDay
+            FROM TeamsWorkingDays wd
+            INNER JOIN Teams    t ON t.TeamId        = wd.TeamId
+            INNER JOIN Projects p ON p.TeamProjectId = t.TeamProjectId
+            WHERE (@proj IS NULL OR p.TeamProjectName LIKE '%' + @proj + '%')
+              AND (@team IS NULL OR t.TeamName        LIKE '%' + @team + '%')
+            ORDER BY p.TeamProjectName, t.TeamName, wd.TeamWorkingDay;
+            """;
+        return executor.ExecuteJsonAsync(
+            sql,
+            parameters: new Dictionary<string, object?>
+            {
+                ["proj"] = projectName,
+                ["team"] = teamName
+            },
+            maxRows: maxRows ?? 1000,
+            ct: ct);
+    }
+
+    [McpServerTool, Description(
+        "Raw list of backlog levels (Epics, Features, Stories, …) configured per team. Surfaces " +
+        "squads that opted in/out of specific hierarchy levels.")]
+    public Task<string> ListTeamBacklogLevels(
+        [Description("Optional project name substring filter.")] string? projectName,
+        [Description("Optional team name substring filter.")] string? teamName,
+        [Description("Maximum rows. Default 1000.")] int? maxRows,
+        CancellationToken ct)
+    {
+        const string sql = """
+            SELECT p.TeamProjectName, t.TeamName, b.TeamBackLogLevel
+            FROM TeamsBackLogLevels b
+            INNER JOIN Teams    t ON t.TeamId        = b.TeamId
+            INNER JOIN Projects p ON p.TeamProjectId = t.TeamProjectId
+            WHERE (@proj IS NULL OR p.TeamProjectName LIKE '%' + @proj + '%')
+              AND (@team IS NULL OR t.TeamName        LIKE '%' + @team + '%')
+            ORDER BY p.TeamProjectName, t.TeamName, b.TeamBackLogLevel;
+            """;
+        return executor.ExecuteJsonAsync(
+            sql,
+            parameters: new Dictionary<string, object?>
+            {
+                ["proj"] = projectName,
+                ["team"] = teamName
+            },
+            maxRows: maxRows ?? 1000,
+            ct: ct);
+    }
+
+    [McpServerTool, Description(
+        "Kanban board columns per team and backlog level, including WIT/state mappings and split " +
+        "flag (doing/done). Essential to diagnose WIP misconfiguration and state-mapping drift " +
+        "across squads.")]
+    public Task<string> ListTeamBoardColumns(
+        [Description("Optional project name substring filter.")] string? projectName,
+        [Description("Optional team name substring filter.")] string? teamName,
+        [Description("Optional exact backlog level (e.g. 'Stories', 'Features', 'Epics').")] string? backlogLevel,
+        [Description("Maximum rows. Default 2000.")] int? maxRows,
+        CancellationToken ct)
+    {
+        const string sql = """
+            SELECT p.TeamProjectName,
+                   t.TeamName,
+                   c.TeamBackLogLevel,
+                   c.BoardColumnOrder,
+                   c.BoardColumnName,
+                   c.BoardColumnStateMappingsWorkItemType,
+                   c.BoardColumnStateMappingsState,
+                   c.BoardColumnIsSplit
+            FROM TeamsBoardColumns c
+            INNER JOIN Teams    t ON t.TeamId        = c.TeamId
+            INNER JOIN Projects p ON p.TeamProjectId = t.TeamProjectId
+            WHERE (@proj  IS NULL OR p.TeamProjectName LIKE '%' + @proj + '%')
+              AND (@team  IS NULL OR t.TeamName        LIKE '%' + @team + '%')
+              AND (@level IS NULL OR c.TeamBackLogLevel = @level)
+            ORDER BY p.TeamProjectName, t.TeamName, c.TeamBackLogLevel, c.BoardColumnOrder;
+            """;
+        return executor.ExecuteJsonAsync(
+            sql,
+            parameters: new Dictionary<string, object?>
+            {
+                ["proj"]  = projectName,
+                ["team"]  = teamName,
+                ["level"] = backlogLevel
+            },
+            maxRows: maxRows ?? 2000,
+            ct: ct);
+    }
+
+    [McpServerTool, Description(
+        "Swimlanes (board lanes) per team and backlog level. Reveals teams using custom lanes " +
+        "for expedite/bugs/tech-debt vs. teams with the default single-lane setup.")]
+    public Task<string> ListTeamBoardLanes(
+        [Description("Optional project name substring filter.")] string? projectName,
+        [Description("Optional team name substring filter.")] string? teamName,
+        [Description("Optional exact backlog level (e.g. 'Stories', 'Features').")] string? backlogLevel,
+        [Description("Maximum rows. Default 1000.")] int? maxRows,
+        CancellationToken ct)
+    {
+        const string sql = """
+            SELECT p.TeamProjectName,
+                   t.TeamName,
+                   l.TeamBackLogLevel,
+                   l.BoardLaneOrder,
+                   l.BoardLaneName
+            FROM TeamsBoardLanes l
+            INNER JOIN Teams    t ON t.TeamId        = l.TeamId
+            INNER JOIN Projects p ON p.TeamProjectId = t.TeamProjectId
+            WHERE (@proj  IS NULL OR p.TeamProjectName LIKE '%' + @proj + '%')
+              AND (@team  IS NULL OR t.TeamName        LIKE '%' + @team + '%')
+              AND (@level IS NULL OR l.TeamBackLogLevel = @level)
+            ORDER BY p.TeamProjectName, t.TeamName, l.TeamBackLogLevel, l.BoardLaneOrder;
+            """;
+        return executor.ExecuteJsonAsync(
+            sql,
+            parameters: new Dictionary<string, object?>
+            {
+                ["proj"]  = projectName,
+                ["team"]  = teamName,
+                ["level"] = backlogLevel
+            },
+            maxRows: maxRows ?? 1000,
+            ct: ct);
+    }
+
+    [McpServerTool, Description(
+        "Side-by-side pivot of every team inside a single project, aggregating working days, " +
+        "backlog levels, columns-per-level and lanes-per-level into comma-separated strings. " +
+        "Ideal to visually compare squads in a project and spot drift ('why does team A have 7 " +
+        "columns on Stories but team B has 4?').")]
+    public Task<string> CompareTeamsInProject(
+        [Description("Project name substring (required).")] string projectName,
+        [Description("Maximum rows. Default 200.")] int? maxRows,
+        CancellationToken ct)
+    {
+        if (string.IsNullOrWhiteSpace(projectName))
+            throw new ArgumentException("projectName is required.", nameof(projectName));
+
+        const string sql = """
+            WITH T AS (
+                SELECT t.TeamId, t.TeamName, t.TeamWorkingWithBugs, p.TeamProjectName
+                FROM Teams t
+                INNER JOIN Projects p ON p.TeamProjectId = t.TeamProjectId
+                WHERE p.TeamProjectName LIKE '%' + @proj + '%'
+            )
+            SELECT T.TeamProjectName,
+                   T.TeamName,
+                   T.TeamWorkingWithBugs,
+                   (SELECT STRING_AGG(TeamWorkingDay, ', ')
+                           WITHIN GROUP (ORDER BY TeamWorkingDay)
+                    FROM TeamsWorkingDays WHERE TeamId = T.TeamId) AS WorkingDays,
+                   (SELECT STRING_AGG(TeamBackLogLevel, ', ')
+                           WITHIN GROUP (ORDER BY TeamBackLogLevel)
+                    FROM TeamsBackLogLevels WHERE TeamId = T.TeamId) AS BacklogLevels,
+                   (SELECT STRING_AGG(CONCAT(TeamBackLogLevel, ':', CAST(cnt AS VARCHAR(10))), ', ')
+                           WITHIN GROUP (ORDER BY TeamBackLogLevel)
+                    FROM (SELECT TeamBackLogLevel, COUNT(*) AS cnt
+                          FROM TeamsBoardColumns
+                          WHERE TeamId = T.TeamId
+                          GROUP BY TeamBackLogLevel) cc) AS ColumnsPerLevel,
+                   (SELECT STRING_AGG(CONCAT(TeamBackLogLevel, ':', CAST(cnt AS VARCHAR(10))), ', ')
+                           WITHIN GROUP (ORDER BY TeamBackLogLevel)
+                    FROM (SELECT TeamBackLogLevel, COUNT(*) AS cnt
+                          FROM TeamsBoardLanes
+                          WHERE TeamId = T.TeamId
+                          GROUP BY TeamBackLogLevel) ll) AS LanesPerLevel
+            FROM T
+            ORDER BY T.TeamName;
+            """;
+
+        return executor.ExecuteJsonAsync(
+            sql,
+            parameters: new Dictionary<string, object?> { ["proj"] = projectName },
+            maxRows: maxRows ?? 200,
+            ct: ct);
+    }
+
+    [McpServerTool, Description(
+        "Flags teams whose configuration diverges from the 'majority' (mode) inside their own " +
+        "project. Returns only deviating rows. Checked dimensions: working days, backlog levels, " +
+        "total board columns, total board lanes, TeamWorkingWithBugs. Each row shows the team's " +
+        "value next to the project's most common value — quick way to catch standardization gaps.")]
+    public Task<string> DetectTeamConfigurationAnomalies(
+        [Description("Optional project name substring filter. If null, scans all projects.")] string? projectName,
+        [Description("Maximum rows. Default 500.")] int? maxRows,
+        CancellationToken ct)
+    {
+        const string sql = """
+            WITH TeamConfigs AS (
+                SELECT t.TeamProjectId,
+                       p.TeamProjectName,
+                       t.TeamId,
+                       t.TeamName,
+                       t.TeamWorkingWithBugs,
+                       ISNULL((SELECT STRING_AGG(TeamWorkingDay, ',')
+                                       WITHIN GROUP (ORDER BY TeamWorkingDay)
+                               FROM TeamsWorkingDays WHERE TeamId = t.TeamId), '') AS WorkingDays,
+                       ISNULL((SELECT STRING_AGG(TeamBackLogLevel, ',')
+                                       WITHIN GROUP (ORDER BY TeamBackLogLevel)
+                               FROM TeamsBackLogLevels WHERE TeamId = t.TeamId), '') AS BacklogLevels,
+                       (SELECT COUNT(*) FROM TeamsBoardColumns WHERE TeamId = t.TeamId) AS TotalColumns,
+                       (SELECT COUNT(*) FROM TeamsBoardLanes   WHERE TeamId = t.TeamId) AS TotalLanes
+                FROM Teams t
+                INNER JOIN Projects p ON p.TeamProjectId = t.TeamProjectId
+                WHERE (@proj IS NULL OR p.TeamProjectName LIKE '%' + @proj + '%')
+            ),
+            Projs AS (SELECT DISTINCT TeamProjectId FROM TeamConfigs),
+            Modes AS (
+                SELECT pr.TeamProjectId,
+                       (SELECT TOP 1 WorkingDays
+                        FROM TeamConfigs tc
+                        WHERE tc.TeamProjectId = pr.TeamProjectId
+                        GROUP BY WorkingDays
+                        ORDER BY COUNT(*) DESC, MIN(TeamName))           AS ModeWorkingDays,
+                       (SELECT TOP 1 BacklogLevels
+                        FROM TeamConfigs tc
+                        WHERE tc.TeamProjectId = pr.TeamProjectId
+                        GROUP BY BacklogLevels
+                        ORDER BY COUNT(*) DESC, MIN(TeamName))           AS ModeBacklogLevels,
+                       (SELECT TOP 1 TotalColumns
+                        FROM TeamConfigs tc
+                        WHERE tc.TeamProjectId = pr.TeamProjectId
+                        GROUP BY TotalColumns
+                        ORDER BY COUNT(*) DESC, MIN(TeamName))           AS ModeTotalColumns,
+                       (SELECT TOP 1 TotalLanes
+                        FROM TeamConfigs tc
+                        WHERE tc.TeamProjectId = pr.TeamProjectId
+                        GROUP BY TotalLanes
+                        ORDER BY COUNT(*) DESC, MIN(TeamName))           AS ModeTotalLanes,
+                       (SELECT TOP 1 TeamWorkingWithBugs
+                        FROM TeamConfigs tc
+                        WHERE tc.TeamProjectId = pr.TeamProjectId
+                        GROUP BY TeamWorkingWithBugs
+                        ORDER BY COUNT(*) DESC, MIN(TeamName))           AS ModeBugsSetting
+                FROM Projs pr
+            )
+            SELECT tc.TeamProjectName,
+                   tc.TeamName,
+                   CASE WHEN tc.WorkingDays        <> m.ModeWorkingDays     THEN 1 ELSE 0 END AS WorkingDaysDeviates,
+                   CASE WHEN tc.BacklogLevels      <> m.ModeBacklogLevels   THEN 1 ELSE 0 END AS BacklogLevelsDeviates,
+                   CASE WHEN tc.TotalColumns       <> m.ModeTotalColumns    THEN 1 ELSE 0 END AS ColumnsCountDeviates,
+                   CASE WHEN tc.TotalLanes         <> m.ModeTotalLanes      THEN 1 ELSE 0 END AS LanesCountDeviates,
+                   CASE WHEN ISNULL(tc.TeamWorkingWithBugs,'') <> ISNULL(m.ModeBugsSetting,'')
+                        THEN 1 ELSE 0 END AS BugsSettingDeviates,
+                   tc.WorkingDays,         m.ModeWorkingDays     AS ProjectCommonWorkingDays,
+                   tc.BacklogLevels,       m.ModeBacklogLevels   AS ProjectCommonBacklogLevels,
+                   tc.TotalColumns,        m.ModeTotalColumns    AS ProjectCommonTotalColumns,
+                   tc.TotalLanes,          m.ModeTotalLanes      AS ProjectCommonTotalLanes,
+                   tc.TeamWorkingWithBugs, m.ModeBugsSetting     AS ProjectCommonBugsSetting
+            FROM TeamConfigs tc
+            INNER JOIN Modes m ON m.TeamProjectId = tc.TeamProjectId
+            WHERE tc.WorkingDays      <> m.ModeWorkingDays
+               OR tc.BacklogLevels    <> m.ModeBacklogLevels
+               OR tc.TotalColumns     <> m.ModeTotalColumns
+               OR tc.TotalLanes       <> m.ModeTotalLanes
+               OR ISNULL(tc.TeamWorkingWithBugs,'') <> ISNULL(m.ModeBugsSetting,'')
+            ORDER BY tc.TeamProjectName, tc.TeamName;
+            """;
+
+        return executor.ExecuteJsonAsync(
+            sql,
+            parameters: new Dictionary<string, object?> { ["proj"] = projectName },
+            maxRows: maxRows ?? 500,
+            ct: ct);
+    }
+
+    [McpServerTool, Description(
         "Top N most active projects by a chosen metric. Metric must be one of: WorkItemsCreated, " +
         "WorkItemsCompleted, CommitsPushed, PRsCreated, PRsCompleted, Builds, Releases.")]
     public Task<string> TopProjectsByActivity(

@@ -26,6 +26,10 @@ over the `azuredevopsreports` database.
   - `ListProcesses`, `ListProcessFields`, `FindFieldUsage` — process-template
     inventory, custom-field drill-down, and field impact analysis ("field X is
     used in which work items, templates and projects?").
+  - `ListTeams`, `ListTeamWorkingDays`, `ListTeamBacklogLevels`,
+    `ListTeamBoardColumns`, `ListTeamBoardLanes`, `CompareTeamsInProject`,
+    `DetectTeamConfigurationAnomalies` — team configuration audit suite for
+    spotting process drift and standardization gaps across squads.
   - `ListUserGroupMemberships`, `GroupMembershipSummary` — permissioning /
     audit over the `UsersGroups` table ("who is in group X?", counts per group).
   - `ListFeedPackageVersions`, `TopFeedPackagesByDownloads` — Azure Artifacts
