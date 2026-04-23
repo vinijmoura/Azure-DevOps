@@ -156,6 +156,84 @@ public sealed class ReportTools(
     }
 
     [McpServerTool, Description(
+        "Impact analysis for a field: given a field name or reference name, returns every " +
+        "(process template, work item type, field) combination where it appears, plus the count " +
+        "of projects inheriting that template and a sample of up to 20 project names. Answers " +
+        "the common audit question: 'field X is used in which work items, process templates and " +
+        "projects?'. Fuzzy LIKE match on both FieldName and FieldReferenceName.")]
+    public Task<string> FindFieldUsage(
+        [Description("Field name or reference name substring (e.g. 'Severity', 'Custom.Team').")]
+        string fieldNameOrReference,
+        [Description("Optional ProcessName substring filter.")] string? processName,
+        [Description("Optional work item type name substring (e.g. 'Bug', 'User Story').")] string? workItemType,
+        [Description("Maximum rows. Default 500.")] int? maxRows,
+        CancellationToken ct)
+    {
+        if (string.IsNullOrWhiteSpace(fieldNameOrReference))
+            throw new ArgumentException(
+                "fieldNameOrReference is required and cannot be empty.",
+                nameof(fieldNameOrReference));
+
+        const string sql = """
+            WITH Matched AS (
+                SELECT p.ProcessTypeId,
+                       p.ProcessName,
+                       p.ProcessCustomizationType,
+                       f.ProcessWorkItemTypeName                   AS WorkItemType,
+                       f.ProcessWorkItemTypeCustomationType        AS WorkItemTypeCustomization,
+                       f.ProcessWorkItemTypeFieldName              AS FieldName,
+                       f.ProcessWorkItemTypeFieldReferenceName     AS FieldReferenceName,
+                       f.ProcessWorkItemTypeFieldTypeName          AS FieldType,
+                       f.ProcessWorkItemTypeFieldCustomizationType AS FieldCustomizationType
+                FROM ProcessesWorkItemsFields f
+                INNER JOIN Processes p ON p.ProcessTypeId = f.ProcessTypeId
+                WHERE (f.ProcessWorkItemTypeFieldName          LIKE '%' + @field + '%'
+                    OR f.ProcessWorkItemTypeFieldReferenceName LIKE '%' + @field + '%')
+                  AND (@proc IS NULL OR p.ProcessName              LIKE '%' + @proc + '%')
+                  AND (@wit  IS NULL OR f.ProcessWorkItemTypeName  LIKE '%' + @wit  + '%')
+            )
+            SELECT m.ProcessName,
+                   m.ProcessCustomizationType,
+                   m.WorkItemType,
+                   m.WorkItemTypeCustomization,
+                   m.FieldName,
+                   m.FieldReferenceName,
+                   m.FieldType,
+                   m.FieldCustomizationType,
+                   pc.ProjectCount,
+                   ps.SampleProjects
+            FROM Matched m
+            CROSS APPLY (
+                SELECT COUNT(*) AS ProjectCount
+                FROM Projects pr
+                WHERE pr.ProcessTypeId = m.ProcessTypeId
+            ) pc
+            OUTER APPLY (
+                SELECT STRING_AGG(TeamProjectName, ', ')
+                    WITHIN GROUP (ORDER BY TeamProjectName) AS SampleProjects
+                FROM (
+                    SELECT TOP (20) TeamProjectName
+                    FROM Projects
+                    WHERE ProcessTypeId = m.ProcessTypeId
+                    ORDER BY TeamProjectName
+                ) s
+            ) ps
+            ORDER BY m.ProcessName, m.WorkItemType, m.FieldName;
+            """;
+
+        return executor.ExecuteJsonAsync(
+            sql,
+            parameters: new Dictionary<string, object?>
+            {
+                ["field"] = fieldNameOrReference,
+                ["proc"]  = processName,
+                ["wit"]   = workItemType
+            },
+            maxRows: maxRows ?? 500,
+            ct: ct);
+    }
+
+    [McpServerTool, Description(
         "Returns users with their license, creation date and last-access date. " +
         "Supports optional display-name or principal-name substring filter.")]
     public Task<string> ListUsers(

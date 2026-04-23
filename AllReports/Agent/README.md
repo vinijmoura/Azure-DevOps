@@ -23,8 +23,9 @@ over the `azuredevopsreports` database.
   - `ListTables`, `DescribeTable` — live introspection of the connected database.
   - `ListProjects`, `ListUsers`, `ListPullRequests`, `ListRepositories`,
     `ListInstalledExtensions`, `ListPersonalAccessTokens`.
-  - `ListProcesses`, `ListProcessFields` — process-template inventory and
-    custom-field drill-down.
+  - `ListProcesses`, `ListProcessFields`, `FindFieldUsage` — process-template
+    inventory, custom-field drill-down, and field impact analysis ("field X is
+    used in which work items, templates and projects?").
   - `ListUserGroupMemberships`, `GroupMembershipSummary` — permissioning /
     audit over the `UsersGroups` table ("who is in group X?", counts per group).
   - `ListFeedPackageVersions`, `TopFeedPackagesByDownloads` — Azure Artifacts
