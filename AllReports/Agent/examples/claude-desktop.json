@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "azdo-reports": {
+      "command": "azdo-reports-mcp",
+      "env": {
+        "AZDO_REPORTS_CONNECTION_STRING": "Server=tcp:<server>.database.windows.net,1433;Database=azuredevopsreports;User Id=<user>;Password=<password>;Encrypt=True;TrustServerCertificate=False;"
+      }
+    }
+  }
+}

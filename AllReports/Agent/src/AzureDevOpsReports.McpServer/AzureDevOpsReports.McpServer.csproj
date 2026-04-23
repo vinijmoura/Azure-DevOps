@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>AzureDevOpsReports.McpServer</RootNamespace>
+    <AssemblyName>AzureDevOpsReports.McpServer</AssemblyName>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>azdo-reports-mcp</ToolCommandName>
+    <PackageId>AzureDevOpsReports.McpServer</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>vinijmoura</Authors>
+    <Description>MCP server that exposes the Azure DevOps Management Reports SQL database to AI chat clients (VSCode, Claude, etc.).</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/vinijmoura/Azure-DevOps</RepositoryUrl>
+    <PackageTags>mcp;azure-devops;sql;reports;ai</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ModelContextProtocol" Version="0.3.0-preview.4" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
+  </ItemGroup>
+</Project>
