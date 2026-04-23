@@ -878,4 +878,144 @@ public sealed class ReportTools(
             maxRows: maxRows ?? 200,
             ct: ct);
     }
+
+    [McpServerTool, Description(
+        "Lists repository branches with their ahead/behind counts relative to the default branch " +
+        "(from RepositoriesAheadBehind). Ideal for spotting stale branches (high BehindCount), " +
+        "long-running feature branches, or branches with work ready to merge (high AheadCount). " +
+        "Filter by project/repository/branch and minimum thresholds; sort by Behind (default), " +
+        "Ahead or Branch.")]
+    public Task<string> ListBranchesAheadBehind(
+        [Description("Optional project name substring filter.")] string? projectName,
+        [Description("Optional repository name substring filter.")] string? repositoryName,
+        [Description("Optional branch name substring filter.")] string? branchNameContains,
+        [Description("Minimum BehindCount filter (inclusive). Null means no filter.")] int? minBehindCount,
+        [Description("Minimum AheadCount filter (inclusive). Null means no filter.")] int? minAheadCount,
+        [Description("If true, includes only base-version rows; if false, excludes them. Null = no filter.")]
+        bool? baseVersionOnly,
+        [Description("Sort key: Behind (default) | Ahead | Branch.")] string? orderBy,
+        [Description("Maximum rows. Default 200.")] int? maxRows,
+        CancellationToken ct)
+    {
+        var order = (orderBy ?? "Behind").Trim().ToLowerInvariant() switch
+        {
+            "behind" => "ab.RepositoryBranchBehindCount DESC",
+            "ahead"  => "ab.RepositoryBranchAheadCount DESC",
+            "branch" => "p.TeamProjectName, r.RepositoryName, ab.RepositoryBranchName",
+            _ => throw new ArgumentException(
+                    $"Unknown orderBy '{orderBy}'. Allowed: Behind, Ahead, Branch.",
+                    nameof(orderBy))
+        };
+
+        var sql = $"""
+            SELECT p.TeamProjectName,
+                   r.RepositoryName,
+                   r.RepositoryDefaultBranch,
+                   ab.RepositoryBranchName,
+                   ab.RepositoryBranchAheadCount,
+                   ab.RepositoryBranchBehindCount,
+                   ab.RepositoryBranchIsBaseVersion
+            FROM RepositoriesAheadBehind ab
+            INNER JOIN Repositories r ON r.RepositoryId   = ab.RepositoryId
+            INNER JOIN Projects     p ON p.TeamProjectId  = r.TeamProjectId
+            WHERE (@proj     IS NULL OR p.TeamProjectName      LIKE '%' + @proj + '%')
+              AND (@repo     IS NULL OR r.RepositoryName       LIKE '%' + @repo + '%')
+              AND (@branch   IS NULL OR ab.RepositoryBranchName LIKE '%' + @branch + '%')
+              AND (@minBehind IS NULL OR ab.RepositoryBranchBehindCount >= @minBehind)
+              AND (@minAhead  IS NULL OR ab.RepositoryBranchAheadCount  >= @minAhead)
+              AND (@baseOnly IS NULL
+                    OR (@baseOnly = 1 AND ab.RepositoryBranchIsBaseVersion = 1)
+                    OR (@baseOnly = 0 AND ab.RepositoryBranchIsBaseVersion = 0))
+            ORDER BY {order};
+            """;
+
+        return executor.ExecuteJsonAsync(
+            sql,
+            parameters: new Dictionary<string, object?>
+            {
+                ["proj"]      = projectName,
+                ["repo"]      = repositoryName,
+                ["branch"]    = branchNameContains,
+                ["minBehind"] = minBehindCount,
+                ["minAhead"]  = minAheadCount,
+                ["baseOnly"]  = baseVersionOnly is null ? null : (object)(baseVersionOnly.Value ? 1 : 0)
+            },
+            maxRows: maxRows ?? 200,
+            ct: ct);
+    }
+
+    [McpServerTool, Description(
+        "Lists environment approval & check rules per project (from EnvironmentsApprovalsChecks). " +
+        "Useful to audit deployment gates: which environments have which checks configured. " +
+        "Supports substring filters on project, environment and check.")]
+    public Task<string> ListEnvironmentApprovalChecks(
+        [Description("Optional project name substring filter.")] string? projectName,
+        [Description("Optional environment name substring filter.")] string? environmentName,
+        [Description("Optional check name / display-name substring filter.")] string? checkContains,
+        [Description("Maximum rows. Default 500.")] int? maxRows,
+        CancellationToken ct)
+    {
+        const string sql = """
+            SELECT p.TeamProjectName,
+                   e.EnvironmentId,
+                   e.EnvironmentName,
+                   e.EnvironmentCheckName,
+                   e.EnvironmentCheckDisplayName
+            FROM EnvironmentsApprovalsChecks e
+            INNER JOIN Projects p ON p.TeamProjectId = e.TeamProjectId
+            WHERE (@proj  IS NULL OR p.TeamProjectName          LIKE '%' + @proj  + '%')
+              AND (@env   IS NULL OR e.EnvironmentName          LIKE '%' + @env   + '%')
+              AND (@check IS NULL OR e.EnvironmentCheckName        LIKE '%' + @check + '%'
+                                  OR e.EnvironmentCheckDisplayName LIKE '%' + @check + '%')
+            ORDER BY p.TeamProjectName, e.EnvironmentName, e.EnvironmentCheckDisplayName;
+            """;
+
+        return executor.ExecuteJsonAsync(
+            sql,
+            parameters: new Dictionary<string, object?>
+            {
+                ["proj"]  = projectName,
+                ["env"]   = environmentName,
+                ["check"] = checkContains
+            },
+            maxRows: maxRows ?? 500,
+            ct: ct);
+    }
+
+    [McpServerTool, Description(
+        "Aggregated environment gate coverage: one row per environment with CheckCount and a " +
+        "comma-separated list of configured check names. Ordered by CheckCount ASC so environments " +
+        "with the fewest (or zero) gates surface first — quick way to spot under-protected " +
+        "production environments.")]
+    public Task<string> EnvironmentApprovalCoverageSummary(
+        [Description("Optional project name substring filter.")] string? projectName,
+        [Description("Optional environment name substring filter.")] string? environmentName,
+        [Description("Maximum rows. Default 500.")] int? maxRows,
+        CancellationToken ct)
+    {
+        const string sql = """
+            SELECT p.TeamProjectName,
+                   e.EnvironmentId,
+                   e.EnvironmentName,
+                   COUNT(*) AS CheckCount,
+                   STRING_AGG(e.EnvironmentCheckDisplayName, ', ')
+                       WITHIN GROUP (ORDER BY e.EnvironmentCheckDisplayName) AS Checks
+            FROM EnvironmentsApprovalsChecks e
+            INNER JOIN Projects p ON p.TeamProjectId = e.TeamProjectId
+            WHERE (@proj IS NULL OR p.TeamProjectName LIKE '%' + @proj + '%')
+              AND (@env  IS NULL OR e.EnvironmentName LIKE '%' + @env  + '%')
+            GROUP BY p.TeamProjectName, e.EnvironmentId, e.EnvironmentName
+            ORDER BY CheckCount ASC, p.TeamProjectName, e.EnvironmentName;
+            """;
+
+        return executor.ExecuteJsonAsync(
+            sql,
+            parameters: new Dictionary<string, object?>
+            {
+                ["proj"] = projectName,
+                ["env"]  = environmentName
+            },
+            maxRows: maxRows ?? 500,
+            ct: ct);
+    }
 }

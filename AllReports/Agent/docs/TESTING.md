@@ -67,6 +67,15 @@ fastest way to exercise every tool interactively — point it at
    - "Describe the Projects table."
    - "Top 5 projects by pull requests completed."
    - "List expired personal access tokens."
+   - "Who is in the 'Project Collection Administrators' group?"
+   - "Which process templates are in use and how many projects each has?"
+   - "The field 'Severity' is used in which work item types, process
+     templates and projects?"
+   - "Inside project 'Banking', which teams diverge from the most common
+     board configuration?"
+   - "List stale branches with BehindCount greater than 500."
+   - "Which environments have the fewest approval checks configured?"
+   - "Top 10 most downloaded NuGet packages across all feeds."
 
 Each prompt should trigger a tool call that you can inspect in the chat UI.
 

@@ -30,6 +30,11 @@ over the `azuredevopsreports` database.
     `ListTeamBoardColumns`, `ListTeamBoardLanes`, `CompareTeamsInProject`,
     `DetectTeamConfigurationAnomalies` — team configuration audit suite for
     spotting process drift and standardization gaps across squads.
+  - `ListBranchesAheadBehind` — stale/ahead branch detection with thresholds
+    and sort keys, joined with Repositories and Projects.
+  - `ListEnvironmentApprovalChecks`, `EnvironmentApprovalCoverageSummary` —
+    deployment-gate audit: raw check list plus per-environment coverage
+    summary (ordered by fewest gates first).
   - `ListUserGroupMemberships`, `GroupMembershipSummary` — permissioning /
     audit over the `UsersGroups` table ("who is in group X?", counts per group).
   - `ListFeedPackageVersions`, `TopFeedPackagesByDownloads` — Azure Artifacts
