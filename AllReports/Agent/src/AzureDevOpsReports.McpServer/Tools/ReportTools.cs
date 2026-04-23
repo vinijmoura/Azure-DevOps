@@ -69,6 +69,93 @@ public sealed class ReportTools(
     }
 
     [McpServerTool, Description(
+        "Lists process templates (Agile, Scrum, CMMI, custom inherited processes…) with aggregate " +
+        "counts per template: number of projects using it, number of work item types customized, " +
+        "and total number of work-item-type fields tracked.")]
+    public Task<string> ListProcesses(
+        [Description("Optional ProcessName substring filter.")] string? nameContains,
+        [Description("Optional exact match on ProcessCustomizationType (e.g. 'system', 'inherited', 'custom').")]
+        string? customizationType,
+        [Description("Maximum rows. Default 100.")] int? maxRows,
+        CancellationToken ct)
+    {
+        const string sql = """
+            SELECT p.ProcessTypeId,
+                   p.ProcessName,
+                   p.ProcessReferenceName,
+                   p.ProcessCustomizationType,
+                   (SELECT COUNT(*)
+                      FROM Projects pr
+                     WHERE pr.ProcessTypeId = p.ProcessTypeId)            AS ProjectCount,
+                   (SELECT COUNT(DISTINCT ProcessWorkItemTypeName)
+                      FROM ProcessesWorkItemsFields f
+                     WHERE f.ProcessTypeId = p.ProcessTypeId)             AS WorkItemTypeCount,
+                   (SELECT COUNT(*)
+                      FROM ProcessesWorkItemsFields f
+                     WHERE f.ProcessTypeId = p.ProcessTypeId)             AS FieldCount
+            FROM Processes p
+            WHERE (@name IS NULL OR p.ProcessName LIKE '%' + @name + '%')
+              AND (@type IS NULL OR p.ProcessCustomizationType = @type)
+            ORDER BY ProjectCount DESC, p.ProcessName;
+            """;
+
+        return executor.ExecuteJsonAsync(
+            sql,
+            parameters: new Dictionary<string, object?>
+            {
+                ["name"] = nameContains,
+                ["type"] = customizationType
+            },
+            maxRows: maxRows ?? 100,
+            ct: ct);
+    }
+
+    [McpServerTool, Description(
+        "Lists work item type fields across process templates (from ProcessesWorkItemsFields " +
+        "joined with Processes). Filters by process name, work item type, field name, and an " +
+        "optional exact-match on FieldCustomizationType. Useful for auditing custom fields.")]
+    public Task<string> ListProcessFields(
+        [Description("Optional ProcessName substring filter.")] string? processName,
+        [Description("Optional work item type name substring (e.g. 'Bug', 'User Story').")] string? workItemType,
+        [Description("Optional field name substring.")] string? fieldName,
+        [Description("Optional exact match on ProcessWorkItemTypeFieldCustomizationType (e.g. 'custom', 'system', 'inherited').")]
+        string? fieldCustomizationType,
+        [Description("Maximum rows. Default 500.")] int? maxRows,
+        CancellationToken ct)
+    {
+        const string sql = """
+            SELECT p.ProcessName,
+                   f.ProcessWorkItemTypeName,
+                   f.ProcessWorkItemTypeCustomationType,
+                   f.ProcessWorkItemTypeFieldName,
+                   f.ProcessWorkItemTypeFieldReferenceName,
+                   f.ProcessWorkItemTypeFieldCustomizationType,
+                   f.ProcessWorkItemTypeFieldTypeName
+            FROM ProcessesWorkItemsFields f
+            INNER JOIN Processes p ON p.ProcessTypeId = f.ProcessTypeId
+            WHERE (@proc  IS NULL OR p.ProcessName                             LIKE '%' + @proc  + '%')
+              AND (@wit   IS NULL OR f.ProcessWorkItemTypeName                 LIKE '%' + @wit   + '%')
+              AND (@field IS NULL OR f.ProcessWorkItemTypeFieldName            LIKE '%' + @field + '%')
+              AND (@fcust IS NULL OR f.ProcessWorkItemTypeFieldCustomizationType = @fcust)
+            ORDER BY p.ProcessName,
+                     f.ProcessWorkItemTypeName,
+                     f.ProcessWorkItemTypeFieldName;
+            """;
+
+        return executor.ExecuteJsonAsync(
+            sql,
+            parameters: new Dictionary<string, object?>
+            {
+                ["proc"]  = processName,
+                ["wit"]   = workItemType,
+                ["field"] = fieldName,
+                ["fcust"] = fieldCustomizationType
+            },
+            maxRows: maxRows ?? 500,
+            ct: ct);
+    }
+
+    [McpServerTool, Description(
         "Returns users with their license, creation date and last-access date. " +
         "Supports optional display-name or principal-name substring filter.")]
     public Task<string> ListUsers(
