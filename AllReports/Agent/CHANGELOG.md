@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Removed `<InvariantGlobalization>true</InvariantGlobalization>` from
+  `src/Directory.Build.props`. `Microsoft.Data.SqlClient` requires ICU-backed
+  globalization to handle SQL Server collations; under invariant mode,
+  `SqlConnection.OpenAsync` threw
+  `System.NotSupportedException: Globalization Invariant Mode is not supported`
+  on every tool call.
+
 ### Docs
 - Rewrote `docs/INSTALLATION.md` as a single consolidated guide covering
   prerequisites, source install, VS Code / Claude Desktop / Claude CLI wiring,
