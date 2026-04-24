@@ -1,10 +1,10 @@
 # Testing locally
 
-There are three layers of testing, in order of cost:
+Three layers of testing, in order of cost:
 
 1. **Unit tests** — fast, no database required.
-2. **Manual MCP handshake** — talk to the server over stdio without any client.
-3. **End-to-end in a real MCP client** — VS Code / Claude Desktop.
+2. **MCP Inspector** — interactive UI to exercise every tool without any chat client.
+3. **End-to-end in a real MCP client** — VS Code / Claude Desktop / Claude CLI.
 
 ## 1. Unit tests
 
@@ -13,66 +13,76 @@ cd AllReports/Agent/src
 dotnet test
 ```
 
-These cover:
+Current coverage (28 tests):
 
-- `ReadOnlySqlValidator` — accepts / rejects queries correctly, including
-  edge cases such as forbidden keywords inside string literals or comments.
+- `ReadOnlySqlValidator` — accepts/rejects SQL correctly, including forbidden
+  keywords inside string literals and inside comments.
 - `SchemaReference` — embedded documentation stays in sync with the SQL
   script.
 
 No SQL Server instance is required.
 
-## 2. Manual MCP handshake (no client)
+## 2. MCP Inspector
 
-Start the server so it speaks MCP over stdio:
-
-```bash
-export AZDO_REPORTS_CONNECTION_STRING="..."
-dotnet run --project AzureDevOpsReports.McpServer
-```
-
-In another terminal, pipe an `initialize` request in:
+The Inspector is the fastest way to verify a live database connection and to
+exercise every one of the 28 tools.
 
 ```bash
-cat <<'EOF' | dotnet run --project AzureDevOpsReports.McpServer
-{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2024-11-05","capabilities":{},"clientInfo":{"name":"manual","version":"0.0"}}}
-EOF
+# one-time
+npm install -g @modelcontextprotocol/inspector
+
+# run against the built DLL (adjust the path)
+export AZDO_REPORTS_CONNECTION_STRING="Server=tcp:...;"
+npx @modelcontextprotocol/inspector \
+  dotnet /absolute/path/.../AzureDevOpsReports.McpServer.dll
 ```
 
-You should see a JSON `result` with the server's capabilities. You can
-follow up with `tools/list`:
+What to check once the UI loads:
 
-```json
-{"jsonrpc":"2.0","id":2,"method":"tools/list","params":{}}
-```
-
-…and then invoke one:
-
-```json
-{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"ListTables","arguments":{}}}
-```
-
-Tip: the **MCP Inspector** (`npx @modelcontextprotocol/inspector`) is the
-fastest way to exercise every tool interactively — point it at
-`dotnet run --project ...AzureDevOpsReports.McpServer`.
+1. **Tools tab** lists 28 entries.
+2. Call `ListTables` — you should get 17 rows back (one per table).
+3. Call `GetSchemaReference` — returns the embedded schema doc.
+4. Call `ListProjects` with no arguments — should return up to 100 rows.
+5. Try a read-only query via `ExecuteReadOnlySql`:
+   `SELECT TOP 5 TeamProjectName FROM Projects ORDER BY TeamProjectName`
+6. Confirm an invalid query is rejected — paste
+   `DELETE FROM Projects` into `ExecuteReadOnlySql` and expect
+   `Only SELECT or WITH queries are allowed`.
 
 ## 3. End-to-end in VS Code
 
-1. Install the server (see `docs/INSTALLATION.md`).
-2. Add `examples/vscode-mcp.json` to your workspace as `.vscode/mcp.json`
-   (adjust the connection string).
-3. Reload VS Code.
-4. Open the Chat pane and try:
+1. Install the server (see [`INSTALLATION.md`](INSTALLATION.md)).
+2. Copy `examples/vscode-mcp.json` to your workspace as `.vscode/mcp.json`
+   and adjust the path + connection string.
+3. Reload VS Code (`Ctrl+Shift+P` → *Developer: Reload Window*).
+4. Open the Chat pane and try these prompts:
+
+   **Discovery**
    - "What tables exist in the reports database?"
    - "Describe the Projects table."
+
+   **Projects and activity**
    - "Top 5 projects by pull requests completed."
-   - "List expired personal access tokens."
+   - "List active pull requests in project *Banking*."
+
+   **Users & permissioning**
    - "Who is in the 'Project Collection Administrators' group?"
+   - "List expired personal access tokens."
+   - "Which groups have more than 50 members?"
+
+   **Process templates & fields**
    - "Which process templates are in use and how many projects each has?"
-   - "The field 'Severity' is used in which work item types, process
+   - "The field *Severity* is used in which work item types, process
      templates and projects?"
-   - "Inside project 'Banking', which teams diverge from the most common
-     board configuration?"
+   - "Show all custom fields of the Scrum process."
+
+   **Team configuration audit**
+   - "In project *Banking*, which teams diverge from the most common board
+     configuration?"
+   - "List teams with fewer than 4 columns on their Stories board."
+   - "Which teams don't include bugs on the backlog?"
+
+   **Branches, environments, feeds**
    - "List stale branches with BehindCount greater than 500."
    - "Which environments have the fewest approval checks configured?"
    - "Top 10 most downloaded NuGet packages across all feeds."
@@ -81,9 +91,14 @@ Each prompt should trigger a tool call that you can inspect in the chat UI.
 
 ## 4. Troubleshooting
 
-| Symptom | Likely cause | Fix |
-|---|---|---|
-| `Missing connection string` on startup | env var not set | Export `AZDO_REPORTS_CONNECTION_STRING` |
-| `Login failed for user` | wrong SQL credentials | Verify SQL login and firewall rules |
-| `Only SELECT or WITH queries are allowed` | attempted DDL/DML | Rephrase as a `SELECT` or use a dedicated tool |
-| Client sees no tools | server didn't start | Check stderr — the logger writes to stderr, stdout is reserved for MCP |
+See [`INSTALLATION.md#troubleshooting`](INSTALLATION.md#troubleshooting) for
+the shared table. Test-specific tips:
+
+- If `dotnet test` fails on restore, make sure the .NET 10 SDK is active
+  (`dotnet --version`). A `global.json` in `src/` pins the minimum.
+- If the Inspector shows tools but every call times out, the server is
+  reaching SQL but queries aren't completing — check the SQL Activity Monitor
+  for blocking sessions.
+- If the Inspector can't start the server at all, run the same
+  `dotnet /path/to/.dll` command directly in the shell first and look at the
+  stderr output.

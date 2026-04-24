@@ -50,9 +50,12 @@ of contributions are welcome, and the conventions we follow.
 ## Pull request checklist
 
 - [ ] `dotnet test` passes locally.
-- [ ] New/changed tools are documented in `README.md`.
+- [ ] New/changed tools are documented in `README.md` (tool catalog).
+- [ ] `CHANGELOG.md` has an entry under `[Unreleased]` describing the change.
 - [ ] If the database schema changed, `SchemaReference.Summary` was updated
       and the relevant tools were adjusted.
+- [ ] If a new end-user-facing feature was added, `docs/INSTALLATION.md` or
+      `docs/TESTING.md` (example prompts) were updated.
 - [ ] No secrets (connection strings, PATs) in tests, samples, or commit
       history.
 
